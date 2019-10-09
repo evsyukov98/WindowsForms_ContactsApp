@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-
 namespace ContactsApp.Model
 {
     public class Person
@@ -13,7 +12,8 @@ namespace ContactsApp.Model
         private string _mail;
         public string Vkid;
 
-        public Person(string name, string surname,string number,string date,string mail, string vkid)
+        public Person(string name, string surname, string number, string date,
+            string mail, string vkid)
         {
             Name = name;
             Surname = surname;
@@ -28,7 +28,7 @@ namespace ContactsApp.Model
             get => _name;
             set
             {
-                string pattern = "[A-Z][a-z]*";
+                var pattern = "[A-Z][a-z]*";
                 if (Regex.IsMatch(value, pattern))
                 {
                     Console.WriteLine("Имя подтверждено");
@@ -43,10 +43,10 @@ namespace ContactsApp.Model
 
         public string Surname
         {
-            get { return _surname;}
+            get => _surname;
             set
             {
-                string pattern = "[A-Z][a-z]*";
+                var pattern = "[A-Z][a-z]*";
                 if (Regex.IsMatch(value, pattern))
                 {
                     Console.WriteLine("Фамилия Подтверждена");
@@ -61,10 +61,10 @@ namespace ContactsApp.Model
 
         public string Date
         {
-            get { return _date;}
+            get => _date;
             set
             {
-                string pattern = @"[0-3][0-9]\.[0-1][0-9]\.[0-9]{4}";
+                var pattern = @"[0-3][0-9]\.[0-1][0-9]\.[0-9]{4}";
                 if (Regex.IsMatch(value, pattern))
                 {
                     Console.WriteLine("Дата подтверждена");
@@ -79,10 +79,10 @@ namespace ContactsApp.Model
 
         public string Number
         {
-            get { return _number; }
+            get => _number;
             set
             {
-                string pattern = @"\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}";
+                var pattern = @"\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}";
                 if (Regex.IsMatch(value, pattern))
                 {
                     Console.WriteLine("Номер подтвержден");
@@ -97,10 +97,10 @@ namespace ContactsApp.Model
 
         public string Mail
         {
-            get { return _mail; }
+            get => _mail;
             set
             {
-                string pattern = @"\w+@\w+\.w+";
+                var pattern = @"\w+@\w+\.w+";
                 if (Regex.IsMatch(value, pattern))
                 {
                     Console.WriteLine("Номер подтверждена");
@@ -112,6 +112,5 @@ namespace ContactsApp.Model
                 }
             }
         }
-        
     }
 }
