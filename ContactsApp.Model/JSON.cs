@@ -3,10 +3,11 @@ using Newtonsoft.Json;
 
 namespace ContactsApp.Model
 {
-    public class Json
+    public class SerializerJson<_>
     {
-        private static string _directory ;
-        public Json (string directory)
+        protected string _directory;
+
+        public SerializerJson(string directory)
         {
             Directory = directory;
         }
@@ -17,23 +18,23 @@ namespace ContactsApp.Model
             set => _directory = value;
         }
 
-        public void Serialize(Person person)
+        public void Serialize(_ person, string name)
         {
-            using (TextWriter writer = File.CreateText(_directory + person.Name + ".json"))
+            using (TextWriter writer = File.CreateText(_directory + name + ".json"))
             {
                 var serializer = new JsonSerializer();
                 serializer.Serialize(writer, person);
             }
         }
 
-        public Person UnSerialize(string person)
+        public _ UnSerialize(string person)
         {
             using (TextReader reader = File.OpenText(
                 _directory +
                 person + ".json"))
             {
                 var serializer = new JsonSerializer();
-                var data = (Person) serializer.Deserialize(reader, typeof(Person));
+                var data = (_) serializer.Deserialize(reader, typeof(_));
                 return data;
             }
         }
