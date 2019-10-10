@@ -9,7 +9,7 @@ namespace ContactsApp.Consol
         private static void Main()
         {
             var persons = new List<Person>();
-
+            var json = new Json(@"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\JsonSaves\");
             var stop = true;
             while (stop)
             {
@@ -34,14 +34,11 @@ namespace ContactsApp.Consol
                         var surname = Console.ReadLine();
                         Console.WriteLine("\nВведите номер:");
                         var number = Console.ReadLine();
-                        Console.WriteLine("\nВведите дату:");
-
-                        //var date = Console.ReadLine();
                         Console.WriteLine("\nВведите почту:");
                         var mail = Console.ReadLine();
                         Console.WriteLine("\nВведите vkid:");
                         var vkId = Console.ReadLine();
-                        persons.Add(new Person(name, surname, number, DateTime.Now, mail,
+                        persons.Add(new Person(name, surname, number, new DateTime(1998, 7, 20), mail,
                             vkId));
 
                         break;
@@ -98,7 +95,7 @@ namespace ContactsApp.Consol
                         {
                             if (person.Name == temp)
                             {
-                                Json.Serialize(person);
+                                json.Serialize(person);
                             }
                         }
 
@@ -106,7 +103,7 @@ namespace ContactsApp.Consol
                     case 6:
                         Console.WriteLine("Введите имя контакта");
                         temp = Console.ReadLine();
-                        persons.Add(Json.UnSerialize(temp));
+                        persons.Add(json.UnSerialize(temp));
                         break;
                     case 7:
                         persons.Add(new Person("Ivan", "Evsyukov", "+7(777)777-77-77",

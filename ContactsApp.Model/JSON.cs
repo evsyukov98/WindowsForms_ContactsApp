@@ -1,26 +1,39 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Newtonsoft.Json;
 
 namespace ContactsApp.Model
 {
     public class Json
     {
-        public static void Serialize(Person person)
+        private static string _directory ;
+        public Json (string directory)
         {
-            using (TextWriter writer = File.CreateText(@"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\JsonSaves\"+person.Name+".json"))
+            Directory = directory;
+        }
+
+        public string Directory
+        {
+            get => _directory;
+            set => _directory = value;
+        }
+
+        public void Serialize(Person person)
+        {
+            using (TextWriter writer = File.CreateText(_directory + person.Name + ".json"))
             {
-                JsonSerializer serializer = new JsonSerializer();
+                var serializer = new JsonSerializer();
                 serializer.Serialize(writer, person);
             }
         }
 
-        public static Person UnSerialize(String person)
+        public Person UnSerialize(string person)
         {
-            using (TextReader reader = File.OpenText(@"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\JsonSaves\" + person + ".json"))
+            using (TextReader reader = File.OpenText(
+                _directory +
+                person + ".json"))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                Person data = (Person) serializer.Deserialize(reader, typeof(Person));
+                var serializer = new JsonSerializer();
+                var data = (Person) serializer.Deserialize(reader, typeof(Person));
                 return data;
             }
         }
