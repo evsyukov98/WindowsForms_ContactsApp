@@ -9,9 +9,8 @@ namespace ContactsApp.Consol
         private static void Main()
         {
             var persons = new List<Person>();
-            var json =
-                new SerializerJson<Person>(
-                    @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\");
+            var json = new SerializerJson<Person>(
+                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\");
 
             var stop = true;
             while (stop)
@@ -102,7 +101,7 @@ namespace ContactsApp.Consol
                                 json.Serialize(person, person.Name);
                             }
                         }
-
+                        
                         break;
                     case 6:
                         Console.WriteLine("Введите имя контакта");

@@ -1,8 +1,14 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
+// ReSharper disable All
+
 namespace ContactsApp.Model
 {
+    /// <summary>
+    ///     Класс Person, хранящий информацию о имени, номера, почты,
+    ///     vkId контакта.
+    /// </summary>
     [Serializable]
     public class Person
     {
@@ -25,6 +31,9 @@ namespace ContactsApp.Model
             VkId = vkId;
         }
 
+        /// <summary>
+        ///     Возвращает и задает имя пользователя.
+        /// </summary>
         public string Name
         {
             get => _name;
@@ -43,6 +52,9 @@ namespace ContactsApp.Model
             }
         }
 
+        /// <summary>
+        ///     Возвращает и задает фамилию пользователя.
+        /// </summary>
         public string Surname
         {
             get => _surname;
@@ -60,7 +72,9 @@ namespace ContactsApp.Model
             }
         }
 
-
+        /// <summary>
+        ///     Возвращает и задает номер пользователя.
+        /// </summary>
         public string Number
         {
             get => _number;
@@ -79,6 +93,9 @@ namespace ContactsApp.Model
             }
         }
 
+        /// <summary>
+        ///     Возвращает и задает дату рождения пользователя.
+        /// </summary>
         public DateTime Date
         {
             get => _date;
@@ -95,6 +112,9 @@ namespace ContactsApp.Model
             }
         }
 
+        /// <summary>
+        ///     Возвращает и задает почту пользователя.
+        /// </summary>
         public string Mail
         {
             get => _mail;
@@ -115,6 +135,9 @@ namespace ContactsApp.Model
             }
         }
 
+        /// <summary>
+        ///     Возвращает и задает vkid пользователя.
+        /// </summary>
         public string VkId
         {
             get => _vkId;
