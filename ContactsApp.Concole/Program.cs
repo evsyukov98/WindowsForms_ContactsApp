@@ -48,10 +48,10 @@ namespace ContactsApp.Consol
 
                     case 3:
                         Console.WriteLine("Введите имя контакта");
-                        var name_ = Console.ReadLine();
+                        var temp = Console.ReadLine();
                         foreach (var person in persons)
                         {
-                            if (name_ == person.Name)
+                            if (temp == person.Name)
                             {
                                 persons.Remove(person);
                                 Console.WriteLine("Контакт удален");
@@ -63,13 +63,20 @@ namespace ContactsApp.Consol
 
                         break;
                     case 4:
+                        Console.WriteLine("Введите имя контакта");
+                        temp = Console.ReadLine();
                         foreach (var person in persons)
                         {
-                            Console.WriteLine("\nИмя: " + person.Name + "\nФамилия:" +
-                                              person.Surname + "\n Номер:" +
-                                              person.Number + "\n Дата:" + person.Date +
-                                              "\n Почта:" + person.Mail + "\n Vkid:" +
-                                              person.Vkid);
+
+                            if (person.Name == temp)
+                            {
+                                Console.WriteLine("\nИмя: " + person.Name + "\nФамилия:" +
+                                                  person.Surname + "\n Номер:" +
+                                                  person.Number + "\n Дата:" +
+                                                  person.Date +
+                                                  "\n Почта:" + person.Mail + "\n Vkid:" +
+                                                  person.Vkid);
+                            }
                         }
 
                         break;
@@ -82,10 +89,10 @@ namespace ContactsApp.Consol
                         persons.Add(new Person("Ivan", "Evsyukov", "+7(777)777-77-77",
                             "01.01.1978", "ivan@mail.com", "vkid"));
 
-                        persons.Add(new Person("Andrey", "Evsyukov", "+7(777)777-77-77",
+                        persons.Add(new Person("Andrey", "Ashimov", "+7(999)499-77-77",
                             "01.01.1978", "ivan@mail.com", "vkid"));
 
-                        persons.Add(new Person("Vova", "Evsyukov", "+7(777)777-77-77",
+                        persons.Add(new Person("Vova", "Laptev", "+7(777)777-77-77",
                             "01.01.1978", "ivan@mail.com", "vkid"));
 
                         break;

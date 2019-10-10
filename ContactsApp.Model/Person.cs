@@ -10,8 +10,8 @@ namespace ContactsApp.Model
         private string _date;
         private string _number;
         private string _mail;
-        public string Vkid;
-        
+        private string _vkid;
+
 
         public Person(string name, string surname, string number, string date,
             string mail, string vkid)
@@ -31,13 +31,13 @@ namespace ContactsApp.Model
             {
                 var pattern = "[A-Z][a-z]*";
 
-                if (Regex.IsMatch(value , pattern))
+                if (Regex.IsMatch(value, pattern))
                 {
                     _name = value;
                 }
                 else
                 {
-                    _name = null;
+                    throw new ArgumentException(nameof(_name));
                 }
             }
         }
@@ -54,7 +54,7 @@ namespace ContactsApp.Model
                 }
                 else
                 {
-                    _name = null;
+                    throw new ArgumentException(nameof(_surname));
                 }
             }
         }
@@ -66,15 +66,15 @@ namespace ContactsApp.Model
             {
                 var pattern = @"[0-3][0-9]\.[0-1][0-9]\.[0-9]{4}";
 
-                
-                    if (Regex.IsMatch(value, pattern))
-                    {
-                        _date = value;
-                    }
-                    else
-                    {
-                        _date = null;
-                    }
+
+                if (Regex.IsMatch(value, pattern))
+                {
+                    _date = value;
+                }
+                else
+                {
+                    throw new ArgumentException(nameof(_date));
+                }
             }
         }
 
@@ -91,7 +91,7 @@ namespace ContactsApp.Model
                 }
                 else
                 {
-                    _number = null;
+                    throw new ArgumentException(nameof(_number));
                 }
             }
         }
@@ -105,14 +105,30 @@ namespace ContactsApp.Model
                     @"^(?("")(""[^""]+?""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                     @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
 
-                    if (Regex.IsMatch(value , pattern))
-                    {
-                        _mail = value;
-                    }
-                    else
-                    {
-                        _mail = null;
-                    }
+                if (Regex.IsMatch(value, pattern))
+                {
+                    _mail = value;
+                }
+                else
+                {
+                    throw new ArgumentException(nameof(_mail));
+                }
+            }
+        }
+
+        public string Vkid
+        {
+            get => _vkid;
+            set
+            {
+                if (value != null)
+                {
+                    _vkid = value;
+                }
+                else
+                {
+                    throw new DivideByZeroException(nameof(_vkid));
+                }
             }
         }
     }
