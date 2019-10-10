@@ -28,12 +28,12 @@ namespace ContactsApp.Consol
                         Console.WriteLine("\nВведите номер:");
                         var number = Console.ReadLine();
                         Console.WriteLine("\nВведите дату:");
-                        var date = Console.ReadLine();
+                        //var date = Console.ReadLine();
                         Console.WriteLine("\nВведите почту:");
                         var mail = Console.ReadLine();
                         Console.WriteLine("\nВведите vkid:");
                         var vkId = Console.ReadLine();
-                        persons.Add(new Person(name, surname, number, date, mail, vkId));
+                        persons.Add(new Person(name, surname, number, DateTime.Now, mail, vkId));
                         break;
 
                     case 2:
@@ -73,7 +73,7 @@ namespace ContactsApp.Consol
                                 Console.WriteLine("\nИмя: " + person.Name + "\nФамилия:" +
                                                   person.Surname + "\n Номер:" +
                                                   person.Number + "\n Дата:" +
-                                                  person.Date +
+                                                  person.Date.ToString("d") +
                                                   "\n Почта:" + person.Mail + "\n Vkid:" +
                                                   person.VkId);
                             }
@@ -87,13 +87,13 @@ namespace ContactsApp.Consol
 
                     case 6:
                         persons.Add(new Person("Ivan", "Evsyukov", "+7(777)777-77-77",
-                            "01.01.1978", "ivan@mail.com", "vkid"));
+                            new DateTime(1998, 7, 20), "ivan@mail.com", "vkid"));
 
                         persons.Add(new Person("Andrey", "Ashimov", "+7(999)499-77-77",
-                            "01.01.1978", "ivan@mail.com", "vkid"));
+                            new DateTime(1974, 7, 20), "ivan@mail.com", "vkid"));
 
                         persons.Add(new Person("Vova", "Laptev", "+7(777)777-77-77",
-                            "01.01.1978", "ivan@mail.com", "vkid"));
+                            new DateTime(1967, 7, 20), "ivan@mail.com", "vkid"));
 
                         break;
 

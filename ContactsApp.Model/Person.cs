@@ -7,13 +7,13 @@ namespace ContactsApp.Model
     {
         private string _name;
         private string _surname;
-        private string _date;
         private string _number;
         private string _mail;
         private string _vkId;
+        private DateTime _date;
 
-
-        public Person(string name, string surname, string number, string date,
+        
+        public Person(string name, string surname, string number, DateTime date,
             string mail, string vkId)
         {
             Name = name;
@@ -59,24 +59,7 @@ namespace ContactsApp.Model
             }
         }
 
-        public string Date
-        {
-            get => _date;
-            set
-            {
-                var pattern = @"[0-3][0-9]\.[0-1][0-9]\.[0-9]{4}";
-
-
-                if (Regex.IsMatch(value, pattern))
-                {
-                    _date = value;
-                }
-                else
-                {
-                    throw new ArgumentException(nameof(_date));
-                }
-            }
-        }
+       
 
         public string Number
         {
@@ -96,6 +79,17 @@ namespace ContactsApp.Model
             }
         }
 
+        public DateTime Date
+        {
+            get => _date;
+            set
+            {
+                if (value > DateTime.Now)
+                {
+                    throw new ArgumentException(nameof(_date));
+                }
+            }
+        }
         public string Mail
         {
             get => _mail;
@@ -121,7 +115,7 @@ namespace ContactsApp.Model
             get => _vkId;
             set
             {
-                var pattern = @"\w*";
+                var pattern = @"\w+";
                 if (Regex.IsMatch(value, pattern))
                 {
                     _vkId = value;
