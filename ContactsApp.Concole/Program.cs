@@ -32,8 +32,8 @@ namespace ContactsApp.Consol
                         Console.WriteLine("\nВведите почту:");
                         var mail = Console.ReadLine();
                         Console.WriteLine("\nВведите vkid:");
-                        var vkid = Console.ReadLine();
-                        persons.Add(new Person(name, surname, number, date, mail, vkid));
+                        var vkId = Console.ReadLine();
+                        persons.Add(new Person(name, surname, number, date, mail, vkId));
                         break;
 
                     case 2:
@@ -75,7 +75,7 @@ namespace ContactsApp.Consol
                                                   person.Number + "\n Дата:" +
                                                   person.Date +
                                                   "\n Почта:" + person.Mail + "\n Vkid:" +
-                                                  person.Vkid);
+                                                  person.VkId);
                             }
                         }
 

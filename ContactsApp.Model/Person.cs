@@ -10,18 +10,18 @@ namespace ContactsApp.Model
         private string _date;
         private string _number;
         private string _mail;
-        private string _vkid;
+        private string _vkId;
 
 
         public Person(string name, string surname, string number, string date,
-            string mail, string vkid)
+            string mail, string vkId)
         {
             Name = name;
             Surname = surname;
             Number = number;
             Date = date;
             Mail = mail;
-            Vkid = vkid;
+            VkId = vkId;
         }
 
         public string Name
@@ -116,18 +116,19 @@ namespace ContactsApp.Model
             }
         }
 
-        public string Vkid
+        public string VkId
         {
-            get => _vkid;
+            get => _vkId;
             set
             {
-                if (value != null)
+                var pattern = @"\w*";
+                if (Regex.IsMatch(value, pattern))
                 {
-                    _vkid = value;
+                    _vkId = value;
                 }
                 else
                 {
-                    throw new DivideByZeroException(nameof(_vkid));
+                    throw new ArgumentException(nameof(_vkId));
                 }
             }
         }
