@@ -12,7 +12,7 @@ namespace ContactsApp.Model
         private string _vkId;
         private DateTime _date;
 
-        
+
         public Person(string name, string surname, string number, DateTime date,
             string mail, string vkId)
         {
@@ -59,7 +59,6 @@ namespace ContactsApp.Model
             }
         }
 
-       
 
         public string Number
         {
@@ -86,10 +85,15 @@ namespace ContactsApp.Model
             {
                 if (value > DateTime.Now)
                 {
+                    _date = value;
+                }
+                else
+                {
                     throw new ArgumentException(nameof(_date));
                 }
             }
         }
+
         public string Mail
         {
             get => _mail;
