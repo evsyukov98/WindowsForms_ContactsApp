@@ -18,12 +18,12 @@ namespace ContactsApp.Model
             set => _directory = value;
         }
 
-        public void Serialize(_ person, string name)
+        public void Serialize(_ obj, string name)
         {
             using (TextWriter writer = File.CreateText(_directory + name + ".json"))
             {
                 var serializer = new JsonSerializer();
-                serializer.Serialize(writer, person);
+                serializer.Serialize(writer, obj);
             }
         }
 
