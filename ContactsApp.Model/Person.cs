@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ContactsApp.Model
 {
+    [Serializable]
     public class Person
     {
         private string _name;

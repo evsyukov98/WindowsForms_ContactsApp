@@ -18,7 +18,9 @@ namespace ContactsApp.Consol
                     "2 - Вывести список контактов \n " +
                     "3 - Удаления контакта \n " +
                     "4 - Вывести информацию о контакте\n " +
-                    "5 - Остановить работу консоли");
+                    "5 - Сериализовать контакт\n " +
+                    "7 - Создать 3 обьекта для теста\n " +
+                    "8 - Остановить работу консоли\n");
 
                 var selection = Convert.ToInt32(Console.ReadLine());
 
@@ -87,20 +89,38 @@ namespace ContactsApp.Consol
 
                         break;
 
-                    case 5:
-                        stop = false;
-                        break;
 
+                    case 5:
+                        Console.WriteLine("Введите имя контакта");
+                        temp = Console.ReadLine();
+                        foreach (var person in persons)
+                        {
+                            if (person.Name == temp)
+                            {
+                                Json.Serialize(person);
+                            }
+                        }
+
+                        break;
                     case 6:
+                        Console.WriteLine("Введите имя контакта");
+                        temp = Console.ReadLine();
+                        persons.Add(Json.UnSerialize(temp));
+                        break;
+                    case 7:
                         persons.Add(new Person("Ivan", "Evsyukov", "+7(777)777-77-77",
                             new DateTime(1998, 7, 20), "ivan@mail.com", "vkid"));
 
                         persons.Add(new Person("Andrey", "Ashimov", "+7(999)499-77-77",
-                            new DateTime(2050, 7, 20), "ivan@mail.com", "vkid"));
+                            new DateTime(2010, 7, 20), "ivan@mail.com", "vkid"));
 
                         persons.Add(new Person("Vova", "Laptev", "+7(777)777-77-77",
                             new DateTime(1967, 7, 20), "ivan@mail.com", "vkid"));
 
+                        break;
+
+                    case 8:
+                        stop = false;
                         break;
 
                     default:
