@@ -17,11 +17,11 @@ namespace ContactsApp.Model
 
         public static Person UnSerialize(String person)
         {
-            using (TextReader reader = File.OpenText("Person.json"))
+            using (TextReader reader = File.OpenText(@"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\JsonSaves\" + person + ".json"))
             {
                 JsonSerializer serializer = new JsonSerializer();
-
-                return null;
+                Person data = (Person) serializer.Deserialize(reader, typeof(Person));
+                return data;
             }
         }
     }
