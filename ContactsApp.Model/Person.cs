@@ -83,7 +83,7 @@ namespace ContactsApp.Model
             get => _date;
             set
             {
-                if (value > DateTime.Now)
+                if (value < DateTime.Now)
                 {
                     _date = value;
                 }
