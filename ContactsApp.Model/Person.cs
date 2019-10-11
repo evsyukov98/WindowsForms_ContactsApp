@@ -12,14 +12,34 @@ namespace ContactsApp.Model
     [Serializable]
     public class Person
     {
+        /// <summary>
+        ///     Имя контакта
+        /// </summary>
         private string _name;
+        /// <summary>
+        ///     Фамилия контакта
+        /// </summary>
         private string _surname;
+        /// <summary>
+        ///     Номер контакта
+        /// </summary>
         private string _number;
+        /// <summary>
+        ///     Почта контакта
+        /// </summary>
         private string _mail;
+        /// <summary>
+        ///     VkontakteId контакта 
+        /// </summary>
         private string _vkId;
+        /// <summary>
+        ///     Дата рождения контакта
+        /// </summary>
         private DateTime _date;
 
-
+        /// <summary>
+        ///     Создает экземпляр класса Person
+        /// </summary>
         public Person(string name, string surname, string number, DateTime date,
             string mail, string vkId)
         {

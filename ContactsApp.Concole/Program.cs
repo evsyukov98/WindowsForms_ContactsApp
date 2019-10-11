@@ -9,8 +9,7 @@ namespace ContactsApp.Consol
         private static void Main()
         {
             var persons = new List<Person>();
-            var json = new SerializerJson<Person>(
-                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\");
+            
 
             var stop = true;
             while (stop)
@@ -98,15 +97,13 @@ namespace ContactsApp.Consol
                         {
                             if (person.Name == temp)
                             {
-                                json.Serialize(person, person.Name);
+                                Serializer<Person>.Serialize(person, @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\peopless.json");
                             }
                         }
                         
                         break;
                     case 6:
-                        Console.WriteLine("Введите имя контакта");
-                        temp = Console.ReadLine();
-                        persons.Add(json.UnSerialize(temp));
+                        persons.Add(Serializer<Person>.Deserialize(@"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\people.json"));
                         break;
                     case 7:
                         persons.Add(new Person("Ivan", "Evsyukov", "+7(777)777-77-77",
