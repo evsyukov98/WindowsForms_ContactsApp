@@ -28,13 +28,6 @@ namespace ContactsApp.UI
         public AddEditContact()
         {
             InitializeComponent();
-            Text = "Add Contact";
-        }
-
-        public AddEditContact(bool check)
-        {
-            InitializeComponent();
-            Text = "Edit Contact";
         }
 
         private void OkButton_Click(object sender, EventArgs e)
