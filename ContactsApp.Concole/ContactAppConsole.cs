@@ -4,12 +4,12 @@ using ContactsApp.Model;
 
 namespace ContactsApp.Consol
 {
-    internal class Program
+    internal class ContactAppConsole
     {
         private static void Main()
         {
-            var persons = new List<Person>();
-            
+            var persons = new List<Contact>();
+
 
             var stop = true;
             while (stop)
@@ -29,18 +29,19 @@ namespace ContactsApp.Consol
                 switch (selection)
                 {
                     case 1:
-                        Console.WriteLine("\nВведите имя:");
-                        var name = Console.ReadLine();
                         Console.WriteLine("\nВведите фамилию:");
                         var surname = Console.ReadLine();
+                        Console.WriteLine("\nВведите имя:");
+                        var name = Console.ReadLine();
                         Console.WriteLine("\nВведите номер:");
                         var number = Console.ReadLine();
                         Console.WriteLine("\nВведите почту:");
                         var mail = Console.ReadLine();
                         Console.WriteLine("\nВведите vkid:");
                         var vkId = Console.ReadLine();
-                        persons.Add(new Person(name, surname, number,
-                            new DateTime(1998, 7, 20), mail,
+                        persons.Add(new Contact(surname, name, new DateTime(1998, 7, 20),
+                            number,
+                            mail,
                             vkId));
 
                         break;
@@ -71,6 +72,7 @@ namespace ContactsApp.Consol
                         }
 
                         break;
+
                     case 4:
                         Console.WriteLine("Введите имя контакта");
                         temp = Console.ReadLine();
@@ -80,8 +82,8 @@ namespace ContactsApp.Consol
                             {
                                 Console.WriteLine("\nИмя: " + person.Name + "\nФамилия:" +
                                                   person.Surname + "\n Номер:" +
-                                                  person.Number + "\n Дата:" +
-                                                  person.Date.ToString("d") +
+                                                  person.Phone + "\n Дата:" +
+                                                  person.Birthday.ToString("d") +
                                                   "\n Почта:" + person.Mail + "\n Vkid:" +
                                                   person.VkId);
                             }
@@ -97,23 +99,31 @@ namespace ContactsApp.Consol
                         {
                             if (person.Name == temp)
                             {
-                                Serializer<Person>.Serialize(person, @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\peopless.json");
+                                Serializer<Contact>.Serialize(person,
+                                    @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\peopless.json");
                             }
                         }
-                        
+
                         break;
+
                     case 6:
-                        persons.Add(Serializer<Person>.Deserialize(@"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\people.json"));
+                        persons.Add(Serializer<Contact>.Deserialize(
+                            @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\people.json"));
+
                         break;
+
                     case 7:
-                        persons.Add(new Person("Ivan", "Evsyukov", "+7(777)777-77-77",
-                            new DateTime(1998, 7, 20), "ivan@mail.com", "vkid"));
+                        persons.Add(new Contact("Ivan", "Evsyukov",
+                            new DateTime(1998, 7, 20), "+7(777)777-77-77",
+                            "ivan@mail.com", "vkid"));
 
-                        persons.Add(new Person("Andrey", "Ashimov", "+7(999)499-77-77",
-                            new DateTime(2010, 7, 20), "ivan@mail.com", "vkid"));
+                        persons.Add(new Contact("Andrey", "Ashimov",
+                            new DateTime(2010, 7, 20), "+7(999)499-77-77",
+                            "ivan@mail.com", "vkid"));
 
-                        persons.Add(new Person("Vova", "Laptev", "+7(777)777-77-77",
-                            new DateTime(1967, 7, 20), "ivan@mail.com", "vkid"));
+                        persons.Add(new Contact("Vova", "Laptev",
+                            new DateTime(1967, 7, 20), "+7(777)777-77-77",
+                            "ivan@mail.com", "vkid"));
 
                         break;
 

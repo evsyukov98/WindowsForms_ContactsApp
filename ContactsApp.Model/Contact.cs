@@ -10,20 +10,24 @@ namespace ContactsApp.Model
     ///     vkId контакта.
     /// </summary>
     [Serializable]
-    public class Person
+    public class Contact
     {
-        /// <summary>
-        ///     Имя контакта
-        /// </summary>
-        private string _name;
         /// <summary>
         ///     Фамилия контакта
         /// </summary>
         private string _surname;
         /// <summary>
+        ///     Имя контакта
+        /// </summary>
+        private string _name;
+        /// <summary>
+        ///     Дата рождения контакта
+        /// </summary>
+        private DateTime _birthday;
+        /// <summary>
         ///     Номер контакта
         /// </summary>
-        private string _number;
+        private string _phone;
         /// <summary>
         ///     Почта контакта
         /// </summary>
@@ -32,25 +36,41 @@ namespace ContactsApp.Model
         ///     VkontakteId контакта 
         /// </summary>
         private string _vkId;
-        /// <summary>
-        ///     Дата рождения контакта
-        /// </summary>
-        private DateTime _date;
+        
 
         /// <summary>
         ///     Создает экземпляр класса Person
         /// </summary>
-        public Person(string name, string surname, string number, DateTime date,
+        public Contact(string surname, string name, DateTime birthday, string phone, 
             string mail, string vkId)
         {
-            Name = name;
             Surname = surname;
-            Number = number;
-            Date = date;
+            Name = name;
+            Birthday = birthday;
+            Phone = phone;
             Mail = mail;
             VkId = vkId;
         }
 
+        /// <summary>
+        ///     Возвращает и задает фамилию пользователя.
+        /// </summary>
+        public string Surname
+        {
+            get => _surname;
+            set
+            {
+                var pattern = "[A-Z][a-z]*";
+                if (Regex.IsMatch(value, pattern))
+                {
+                    _surname = value;
+                }
+                else
+                {
+                    throw new ArgumentException(nameof(_surname));
+                }
+            }
+        }
         /// <summary>
         ///     Возвращает и задает имя пользователя.
         /// </summary>
@@ -73,21 +93,20 @@ namespace ContactsApp.Model
         }
 
         /// <summary>
-        ///     Возвращает и задает фамилию пользователя.
+        ///     Возвращает и задает дату рождения пользователя.
         /// </summary>
-        public string Surname
+        public DateTime Birthday
         {
-            get => _surname;
+            get => _birthday;
             set
             {
-                var pattern = "[A-Z][a-z]*";
-                if (Regex.IsMatch(value, pattern))
+                if (value < DateTime.Now)
                 {
-                    _surname = value;
+                    _birthday = value;
                 }
                 else
                 {
-                    throw new ArgumentException(nameof(_surname));
+                    throw new ArgumentException(nameof(_birthday));
                 }
             }
         }
@@ -95,39 +114,20 @@ namespace ContactsApp.Model
         /// <summary>
         ///     Возвращает и задает номер пользователя.
         /// </summary>
-        public string Number
+        public string Phone
         {
-            get => _number;
+            get => _phone;
             set
             {
                 var pattern = @"\+7\(\d{3}\)\d{3}-\d{2}-\d{2}";
 
                 if (Regex.IsMatch(value, pattern))
                 {
-                    _number = value;
+                    _phone = value;
                 }
                 else
                 {
-                    throw new ArgumentException(nameof(_number));
-                }
-            }
-        }
-
-        /// <summary>
-        ///     Возвращает и задает дату рождения пользователя.
-        /// </summary>
-        public DateTime Date
-        {
-            get => _date;
-            set
-            {
-                if (value < DateTime.Now)
-                {
-                    _date = value;
-                }
-                else
-                {
-                    throw new ArgumentException(nameof(_date));
+                    throw new ArgumentException(nameof(_phone));
                 }
             }
         }

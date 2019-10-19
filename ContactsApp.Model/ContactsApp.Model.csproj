@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="Project.cs" />
     <Compile Include="Serializer.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
