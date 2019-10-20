@@ -6,17 +6,19 @@ using Newtonsoft.Json;
 namespace ContactsApp.Model
 {
     /// <summary>
-    ///     Класс SerializerJson, сериализует и десериализует
+    ///     Класс ProjectManager, сериализует и десериализует
     /// </summary>
-    public static class Serializer<T>
+    public static class ProjectManager<T>
     {
         /// <summary>
         ///     Метод, выполняющий сериализацию.
         /// </summary>
-        public static void Serialize(T name, string directory)
+        public static void Serializer(T name)
         {
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(directory))
+            using (StreamWriter sw = new StreamWriter(
+                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\peopless.json")
+            )
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.NullValueHandling = NullValueHandling.Include;
@@ -27,12 +29,14 @@ namespace ContactsApp.Model
         /// <summary>
         ///     Метод, выполняющий десериализацию.
         /// </summary>
-        public static T Deserialize(string directory)
+        public static T Deserializer()
         {
             JsonSerializer serializer = new JsonSerializer();
 
             //Открываем поток для чтения из файла с указанием пути
-            using (StreamReader sr = new StreamReader(directory))
+            using (StreamReader sr = new StreamReader(
+                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\peopless.json")
+            )
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 serializer.NullValueHandling = NullValueHandling.Include;

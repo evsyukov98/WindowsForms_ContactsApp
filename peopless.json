@@ -1,1 +1,1 @@
-{"Name":"Ivan","Surname":"Evsyukov","Number":"+7(777)777-77-77","Date":"1998-07-20T00:00:00","Mail":"ivan@mail.com","VkId":"vkid"}
+{"List":[{"Surname":"Ivan","Name":"Yalovskyu","Birthday":"1998-07-20T00:00:00","Phone":"+7(777)777-77-77","Mail":"ivan@mail.com","VkId":"vkid"},{"Surname":"Andrey","Name":"Artamonov","Birthday":"2010-07-20T00:00:00","Phone":"+7(999)499-77-77","Mail":"ivan@mail.com","VkId":"vkid"},{"Surname":"Vova","Name":"Laptev","Birthday":"1967-07-20T00:00:00","Phone":"+7(777)777-77-77","Mail":"ivan@mail.com","VkId":"vkid"}]}

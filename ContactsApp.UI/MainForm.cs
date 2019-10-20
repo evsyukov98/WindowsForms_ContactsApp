@@ -8,6 +8,7 @@ namespace ContactsApp.UI
     //partial вторая часть кода находиться в Form1.Designer.cs
     public partial class MainForm : Form
     {
+        
         private readonly List<Contact> _contacts = new List<Contact>();
 
         public MainForm()
