@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
@@ -8,12 +7,31 @@ namespace ContactsApp.UI
     //partial вторая часть кода находиться в Form1.Designer.cs
     public partial class MainForm : Form
     {
-        
-        private readonly List<Contact> _contacts = new List<Contact>();
+        //класс со списком контактов
+        private Project _project;
 
         public MainForm()
         {
             InitializeComponent();
+            ProjectLoad();
+        }
+
+        // загружает список контактов 
+        private void ProjectLoad()
+        {
+            _project = ProjectManager<Project>.Deserializer(
+                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\ContactsApp.notes");
+
+            foreach (var project in _project.List)
+            {
+                ContactsListBox.Items.Add(project.Name);
+            }
+        }
+
+        private void ProjectSave()
+        {
+            ProjectManager<Project>.Serializer(_project,
+                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\ContactsApp.notes");
         }
 
         private void AddButton_Click(object sender, EventArgs e)
@@ -23,19 +41,22 @@ namespace ContactsApp.UI
 
             var newContact = addForm.Contact;
 
-            //Добавить новые данные
-            _contacts.Add(newContact);
+            //Добавить новые данные в список
+            _project.List.Add(newContact);
+            //Добавить новые данные в UI
             ContactsListBox.Items.Add(newContact.Name);
+            //сохранить все в "ContactsApp.notes"
+            ProjectSave();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
-            var selectedContact = _contacts[selectedIndex];
+            var selectedContact = _project.List[selectedIndex];
 
             // создаем экземпляр формы
             var editForm =
-                new AddEditContact() {Contact = selectedContact};
+                new AddEditContact {Contact = selectedContact};
 
             // отправляем редактируемый элемент 
             editForm.ShowDialog();
@@ -45,18 +66,20 @@ namespace ContactsApp.UI
 
             //Удалить старые данные по выбранному индексу в лист боксе и нашем листе
             ContactsListBox.Items.RemoveAt(selectedIndex);
-            _contacts.RemoveAt(selectedIndex);
+            _project.List.RemoveAt(selectedIndex);
 
-            //Добавить новые данные
-            _contacts.Insert(selectedIndex, updatedContact);
+            //Добавить новые данные в список
+            _project.List.Insert(selectedIndex, updatedContact);
             ContactsListBox.Items.Insert(selectedIndex, updatedContact.Name);
+            ProjectSave();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             var index = ContactsListBox.SelectedIndex;
-            _contacts.RemoveAt(index);
+            _project.List.RemoveAt(index);
             ContactsListBox.Items.RemoveAt(index);
+            ProjectSave();
         }
 
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,7 +87,7 @@ namespace ContactsApp.UI
             var selectedIndex = ContactsListBox.SelectedIndex;
             if (ContactsListBox.SelectedIndex != -1)
             {
-                var selectedContact = _contacts[selectedIndex];
+                var selectedContact = _project.List[selectedIndex];
                 SurnameTextBox.Text = selectedContact.Surname;
                 NameTextBox.Text = selectedContact.Name;
                 BirthdayDateTimePicker.Value = selectedContact.Birthday;
@@ -82,25 +105,26 @@ namespace ContactsApp.UI
             }
         }
 
+        //временная кнопка для тестов создает 3 обьекта
         private void TestButton_Click(object sender, EventArgs e)
         {
             var newContact = new Contact("Ivan", "Evsyukov", new DateTime(1998, 7, 20),
                 "+7(777)777-77-77",
                 "ivan@mail.com", "vkid");
 
-            _contacts.Add(newContact);
+            _project.List.Add(newContact);
             ContactsListBox.Items.Add(newContact.Name);
             var newContact2 = new Contact("Leon", "Tamirov", new DateTime(1978, 11, 10),
                 "+7(777)777-77-77",
                 "dagestan@mail.com", "vkidd");
 
-            _contacts.Add(newContact2);
+            _project.List.Add(newContact2);
             ContactsListBox.Items.Add(newContact2.Name);
             var newContact3 = new Contact("Sasuke", "Uchiha", new DateTime(2012, 1, 30),
                 "+7(777)777-77-77",
                 "chidori@mail.com", "vkisd");
 
-            _contacts.Add(newContact3);
+            _project.List.Add(newContact3);
             ContactsListBox.Items.Add(newContact3.Name);
         }
     }

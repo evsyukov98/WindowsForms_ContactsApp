@@ -8,8 +8,7 @@ namespace ContactsApp.Consol
     {
         private static void Main()
         {
-            var project = new Project();
-            project.List = new List<Contact>();
+            var project = new Project {List = new List<Contact>()};
 
 
             var stop = true;
@@ -20,8 +19,8 @@ namespace ContactsApp.Consol
                     "2 - Вывести список контактов \n " +
                     "3 - Удаления контакта \n " +
                     "4 - Вывести информацию о контакте\n " +
-                    "5 - Сериализовать контакт\n " +
-                    "6 - Десеариализовать контакт\n " +
+                    "5 - Сериализовать  список контактов\n " +
+                    "6 - Десеариализовать список контактов\n " +
                     "7 - Создать 3 обьекта для теста\n " +
                     "8 - Остановить работу консоли\n");
 
@@ -101,12 +100,15 @@ namespace ContactsApp.Consol
 
                     case 5:
                         Console.WriteLine("Сохраняю все контакты");
-                        ProjectManager<Project>.Serializer(project);
+                        ProjectManager<Project>.Serializer(project,
+                            @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\ContactsApp.notes");
+
                         break;
 
                     case 6:
                         Console.WriteLine("Загружаю все контакты");
-                        project = ProjectManager<Project>.Deserializer();
+                        project = ProjectManager<Project>.Deserializer(
+                            @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\ContactsApp.notes");
 
                         break;
 
