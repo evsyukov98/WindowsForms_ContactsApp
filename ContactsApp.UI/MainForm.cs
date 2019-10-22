@@ -127,5 +127,15 @@ namespace ContactsApp.UI
             _project.List.Add(newContact3);
             ContactsListBox.Items.Add(newContact3.Name);
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VkIdTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
