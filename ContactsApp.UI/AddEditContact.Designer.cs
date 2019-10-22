@@ -37,11 +37,11 @@
             this.BirthdayTimePicker = new System.Windows.Forms.DateTimePicker();
             this.VkIdTextBox = new System.Windows.Forms.TextBox();
             this.MailTextBox = new System.Windows.Forms.TextBox();
-            this.PhoneTextBox = new System.Windows.Forms.TextBox();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.SurnameTextBox = new System.Windows.Forms.TextBox();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.PhoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // VkIdLabel
@@ -123,14 +123,6 @@
             this.MailTextBox.TabIndex = 17;
             this.MailTextBox.TextChanged += new System.EventHandler(this.MailTextBox_TextChanged);
             // 
-            // PhoneTextBox
-            // 
-            this.PhoneTextBox.Location = new System.Drawing.Point(102, 120);
-            this.PhoneTextBox.Name = "PhoneTextBox";
-            this.PhoneTextBox.Size = new System.Drawing.Size(285, 20);
-            this.PhoneTextBox.TabIndex = 16;
-            this.PhoneTextBox.TextChanged += new System.EventHandler(this.PhoneTextBox_TextChanged);
-            // 
             // NameTextBox
             // 
             this.NameTextBox.Location = new System.Drawing.Point(102, 68);
@@ -167,17 +159,25 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // PhoneTextBox
+            // 
+            this.PhoneTextBox.Location = new System.Drawing.Point(102, 120);
+            this.PhoneTextBox.Mask = "+7(000)000-00-00";
+            this.PhoneTextBox.Name = "PhoneTextBox";
+            this.PhoneTextBox.Size = new System.Drawing.Size(285, 20);
+            this.PhoneTextBox.TabIndex = 22;
+            // 
             // AddEditContact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 247);
+            this.Controls.Add(this.PhoneTextBox);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
             this.Controls.Add(this.BirthdayTimePicker);
             this.Controls.Add(this.VkIdTextBox);
             this.Controls.Add(this.MailTextBox);
-            this.Controls.Add(this.PhoneTextBox);
             this.Controls.Add(this.NameTextBox);
             this.Controls.Add(this.SurnameTextBox);
             this.Controls.Add(this.VkIdLabel);
@@ -204,10 +204,10 @@
         private System.Windows.Forms.DateTimePicker BirthdayTimePicker;
         private System.Windows.Forms.TextBox VkIdTextBox;
         private System.Windows.Forms.TextBox MailTextBox;
-        private System.Windows.Forms.TextBox PhoneTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.TextBox SurnameTextBox;
         private System.Windows.Forms.Button OkButton;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.MaskedTextBox PhoneTextBox;
     }
 }

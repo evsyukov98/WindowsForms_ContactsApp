@@ -137,5 +137,10 @@ namespace ContactsApp.UI
         {
 
         }
+
+        private void PhoneTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
     }
 }
