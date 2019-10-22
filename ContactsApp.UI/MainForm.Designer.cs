@@ -160,9 +160,9 @@
             // 
             // SurnameTextBox
             // 
-            this.SurnameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SurnameTextBox.Location = new System.Drawing.Point(284, 68);
             this.SurnameTextBox.Name = "SurnameTextBox";
+            this.SurnameTextBox.ReadOnly = true;
             this.SurnameTextBox.Size = new System.Drawing.Size(359, 20);
             this.SurnameTextBox.TabIndex = 8;
             // 
@@ -172,6 +172,7 @@
             this.NameTextBox.Location = new System.Drawing.Point(284, 94);
             this.NameTextBox.MinimumSize = new System.Drawing.Size(109, 20);
             this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.ReadOnly = true;
             this.NameTextBox.Size = new System.Drawing.Size(359, 20);
             this.NameTextBox.TabIndex = 9;
             // 
@@ -181,8 +182,9 @@
             this.MailTextBox.Location = new System.Drawing.Point(284, 172);
             this.MailTextBox.MinimumSize = new System.Drawing.Size(109, 20);
             this.MailTextBox.Name = "MailTextBox";
+            this.MailTextBox.ReadOnly = true;
             this.MailTextBox.Size = new System.Drawing.Size(359, 20);
-            this.MailTextBox.TabIndex = 11;
+            this.MailTextBox.TabIndex = 12;
             // 
             // VkIdTextBox
             // 
@@ -190,8 +192,9 @@
             this.VkIdTextBox.Location = new System.Drawing.Point(284, 198);
             this.VkIdTextBox.MinimumSize = new System.Drawing.Size(109, 20);
             this.VkIdTextBox.Name = "VkIdTextBox";
+            this.VkIdTextBox.ReadOnly = true;
             this.VkIdTextBox.Size = new System.Drawing.Size(359, 20);
-            this.VkIdTextBox.TabIndex = 12;
+            this.VkIdTextBox.TabIndex = 13;
             this.VkIdTextBox.TextChanged += new System.EventHandler(this.VkIdTextBox_TextChanged);
             // 
             // BirthdayDateTimePicker
@@ -199,18 +202,21 @@
             this.BirthdayDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BirthdayDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.BirthdayDateTimePicker.Location = new System.Drawing.Point(284, 120);
+            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2019, 10, 23, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.MinimumSize = new System.Drawing.Size(109, 20);
             this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
             this.BirthdayDateTimePicker.Size = new System.Drawing.Size(109, 20);
-            this.BirthdayDateTimePicker.TabIndex = 13;
+            this.BirthdayDateTimePicker.TabIndex = 10;
+            this.BirthdayDateTimePicker.Value = new System.DateTime(2019, 10, 23, 0, 0, 0, 0);
             // 
             // PhoneTextBox
             // 
             this.PhoneTextBox.Location = new System.Drawing.Point(284, 146);
             this.PhoneTextBox.Mask = "+7(000)000-00-00";
             this.PhoneTextBox.Name = "PhoneTextBox";
+            this.PhoneTextBox.ReadOnly = true;
             this.PhoneTextBox.Size = new System.Drawing.Size(359, 20);
-            this.PhoneTextBox.TabIndex = 18;
+            this.PhoneTextBox.TabIndex = 11;
             this.PhoneTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.PhoneTextBox_MaskInputRejected);
             // 
             // MainForm
@@ -258,9 +264,9 @@
         private System.Windows.Forms.Label MailLabel;
         private System.Windows.Forms.Label VkIdLabel;
         private System.Windows.Forms.TextBox MailTextBox;
-        private System.Windows.Forms.TextBox SurnameTextBox;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.MaskedTextBox PhoneTextBox;
+        private System.Windows.Forms.TextBox SurnameTextBox;
     }
 }
 
