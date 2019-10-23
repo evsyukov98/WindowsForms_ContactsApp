@@ -160,6 +160,7 @@
             // 
             // SurnameTextBox
             // 
+            this.SurnameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SurnameTextBox.Location = new System.Drawing.Point(284, 68);
             this.SurnameTextBox.Name = "SurnameTextBox";
             this.SurnameTextBox.ReadOnly = true;
@@ -211,6 +212,7 @@
             // 
             // PhoneTextBox
             // 
+            this.PhoneTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.PhoneTextBox.Location = new System.Drawing.Point(284, 146);
             this.PhoneTextBox.Mask = "+7(000)000-00-00";
             this.PhoneTextBox.Name = "PhoneTextBox";
