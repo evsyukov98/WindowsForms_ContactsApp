@@ -141,6 +141,8 @@
             // 
             // OkButton
             // 
+            this.OkButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.OkButton.Enabled = false;
             this.OkButton.Location = new System.Drawing.Point(235, 212);
             this.OkButton.Name = "OkButton";
             this.OkButton.Size = new System.Drawing.Size(75, 23);
@@ -191,6 +193,7 @@
             this.Controls.Add(this.SurnameLabel);
             this.Name = "AddEditContact";
             this.Text = "AddEditContact";
+            this.Load += new System.EventHandler(this.AddEditContact_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

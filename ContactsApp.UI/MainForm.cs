@@ -22,15 +22,12 @@ namespace ContactsApp.UI
         /// </summary>
         private void ProjectLoad()
         {
-            _project = ProjectManager<Project>.Deserializer(
-                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\ContactsApp.notes");
+            _project = ProjectManager<Project>.Deserializer(@"ContactsApp.notes");
 
             foreach (var contact in _project.List)
             {
                 ContactsListBox.Items.Add(contact.Surname);
             }
-
-            
         }
         /// <summary>
         /// Сохранить список контактов
@@ -38,23 +35,27 @@ namespace ContactsApp.UI
         private void ProjectSave()
         {
             _project.List = _project.List.OrderBy(u => u.Surname).ToList();
-            ProjectManager<Project>.Serializer(_project,
-                @"Z:\Ivan\Учеба\4 курс\4-1 НТвП\Лабараторная №2\ContactsApp\ContactsApp.notes");
+            ProjectManager<Project>.Serializer(_project, @"ContactsApp.notes");
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
             var addForm = new AddEditContact();
-            addForm.ShowDialog();
+            var addFormResult = addForm.ShowDialog();
+         
+            if (addFormResult == DialogResult.OK)
+            {
+                var newContact = addForm.Contact;
 
-            var newContact = addForm.Contact;
+                //Добавить новые данные в список
+                _project.List.Add(newContact);
 
-            //Добавить новые данные в список
-            _project.List.Add(newContact);
-            //Добавить новые данные в UI
-            ContactsListBox.Items.Add(newContact.Surname);
-            //сохранить все в "ContactsApp.notes"
-            ProjectSave();
+                //Добавить новые данные в UI
+                ContactsListBox.Items.Add(newContact.Surname);
+
+                //сохранить все в "ContactsApp.notes"
+                ProjectSave();
+            }
         }
 
         private void EditButton_Click(object sender, EventArgs e)
