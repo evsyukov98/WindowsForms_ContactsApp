@@ -8,7 +8,21 @@ namespace ContactsApp.UI
 {
     public partial class AddEditContact : Form
     {
+        /// <summary>
+        /// Конструктор AddEditContact
+        /// </summary>
+        public AddEditContact()
+        {
+            InitializeComponent();
+        }
+        /// <summary>
+        /// Класс Contact
+        /// </summary>
         private Contact _contact;
+
+        /// <summary>
+        /// Создает экземпляр класса Contact
+        /// </summary>
         public Contact Contact
         {
             get => _contact;
@@ -27,24 +41,25 @@ namespace ContactsApp.UI
             }
         }
 
-        public AddEditContact()
-        {
-            InitializeComponent();
-        }
-
         private void OkButton_Click(object sender, EventArgs e)
         {
             Contact = new Contact(SurnameTextBox.Text, NameTextBox.Text,
                 BirthdayTimePicker.Value, PhoneTextBox.Text, MailTextBox.Text,
                 VkIdTextBox.Text);
+
             Close();
         }
-
+        /// <summary>
+        /// Кнопка выхода
+        /// </summary>
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Проверка на валидность полей, блокирует кнопку "OK".
+        /// </summary>
         private void ValidateAllData()
         {
             OkButton.Enabled = false;
@@ -55,31 +70,31 @@ namespace ContactsApp.UI
                 SurnameTextBox.BackColor = Color.Red;
                 return;
             }
-            SurnameTextBox.BackColor = Color.White;
-            
 
-            
+            SurnameTextBox.BackColor = Color.White;
+
+
             if (!Regex.IsMatch(NameTextBox.Text, patternNames))
             {
                 NameTextBox.BackColor = Color.Red;
                 return;
             }
+
             NameTextBox.BackColor = Color.White;
-            
+
 
             var patternMail =
                 @"^(?("")(""[^""]+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
-            
+
             if (!Regex.IsMatch(MailTextBox.Text, patternMail))
             {
                 MailTextBox.BackColor = Color.Red;
                 return;
             }
-            MailTextBox.BackColor = Color.White;
-            
 
-            //TODO: не учитывается точки
+            MailTextBox.BackColor = Color.White;
+
             var pattern = @"[0-9a-zA-Z]+";
             if (!Regex.IsMatch(VkIdTextBox.Text, pattern))
             {
@@ -123,14 +138,10 @@ namespace ContactsApp.UI
             ValidateAllData();
         }
 
-        private void PhoneTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void PhoneTextBox_MaskInputRejected(object sender,
+            MaskInputRejectedEventArgs e)
         {
             ValidateAllData();
-        }
-
-        private void AddEditContact_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

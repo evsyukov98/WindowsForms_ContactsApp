@@ -196,14 +196,13 @@
             this.VkIdTextBox.ReadOnly = true;
             this.VkIdTextBox.Size = new System.Drawing.Size(359, 20);
             this.VkIdTextBox.TabIndex = 13;
-            this.VkIdTextBox.TextChanged += new System.EventHandler(this.VkIdTextBox_TextChanged);
             // 
             // BirthdayDateTimePicker
             // 
             this.BirthdayDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BirthdayDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.BirthdayDateTimePicker.Location = new System.Drawing.Point(284, 120);
-            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2019, 10, 23, 0, 0, 0, 0);
+            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2019, 10, 25, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.MinimumSize = new System.Drawing.Size(109, 20);
             this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
             this.BirthdayDateTimePicker.Size = new System.Drawing.Size(109, 20);
@@ -219,7 +218,6 @@
             this.PhoneTextBox.ReadOnly = true;
             this.PhoneTextBox.Size = new System.Drawing.Size(359, 20);
             this.PhoneTextBox.TabIndex = 11;
-            this.PhoneTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.PhoneTextBox_MaskInputRejected);
             // 
             // MainForm
             // 
@@ -245,7 +243,6 @@
             this.Controls.Add(this.SurnameTextBox);
             this.Name = "MainForm";
             this.Text = "ContactsApp";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

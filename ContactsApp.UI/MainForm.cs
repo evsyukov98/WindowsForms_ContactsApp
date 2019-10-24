@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
@@ -8,9 +7,14 @@ namespace ContactsApp.UI
     //partial вторая часть кода находиться в Form1.Designer.cs
     public partial class MainForm : Form
     {
-        //класс со списком контактов
+        /// <summary>
+        ///     Хранит список контактов
+        /// </summary>
         private Project _project;
 
+        /// <summary>
+        ///     Функция инициализации
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -18,7 +22,7 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        /// Загрузить список контактов 
+        ///     Загрузить список контактов, добавить в ListBox.
         /// </summary>
         private void ProjectLoad()
         {
@@ -29,60 +33,68 @@ namespace ContactsApp.UI
                 ContactsListBox.Items.Add(contact.Surname);
             }
         }
+
         /// <summary>
-        /// Сохранить список контактов
+        ///     Сохранить список контактов
         /// </summary>
         private void ProjectSave()
         {
-            _project.List = _project.List.OrderBy(u => u.Surname).ToList();
+            //TODO: сортировка
+            //_project.List = _project.List.OrderBy(u => u.Surname).ToList();
             ProjectManager<Project>.Serializer(_project, @"ContactsApp.notes");
         }
 
+        /// <summary>
+        ///     Кнопка добавления контакта
+        /// </summary>
         private void AddButton_Click(object sender, EventArgs e)
         {
             var addForm = new AddEditContact();
-            var addFormResult = addForm.ShowDialog();
-         
-            if (addFormResult == DialogResult.OK)
-            {
-                var newContact = addForm.Contact;
 
+            if (addForm.ShowDialog() == DialogResult.OK)
+            {
                 //Добавить новые данные в список
-                _project.List.Add(newContact);
+                _project.List.Add(addForm.Contact);
 
                 //Добавить новые данные в UI
-                ContactsListBox.Items.Add(newContact.Surname);
+                ContactsListBox.Items.Add(addForm.Contact.Surname);
 
                 //сохранить все в "ContactsApp.notes"
                 ProjectSave();
             }
         }
 
+        /// <summary>
+        ///     Кнопка редактирования контакта
+        /// </summary>
         private void EditButton_Click(object sender, EventArgs e)
         {
+            // индекс выбранного в ListBox
             var selectedIndex = ContactsListBox.SelectedIndex;
+            // выбранный контакт = список.контактов[индекс выбранного в ListBox]
             var selectedContact = _project.List[selectedIndex];
 
-            // создаем экземпляр формы
-            var editForm =
-                new AddEditContact {Contact = selectedContact};
+            // создаем экземпляр формы, сразу передаем выбранный контакт 
+            var editForm = new AddEditContact {Contact = selectedContact};
 
-            // отправляем редактируемый элемент 
-            editForm.ShowDialog();
 
-            // забираем измененный контакт
-            var updatedContact = editForm.Contact;
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                //Удалить старые данные по выбранному индексу
+                ContactsListBox.Items.RemoveAt(selectedIndex);
+                _project.List.RemoveAt(selectedIndex);
 
-            //Удалить старые данные по выбранному индексу в лист боксе и нашем листе
-            ContactsListBox.Items.RemoveAt(selectedIndex);
-            _project.List.RemoveAt(selectedIndex);
+                //Добавить новые данные в список
+                ContactsListBox.Items.Insert(selectedIndex, editForm.Contact.Surname);
+                _project.List.Insert(selectedIndex, editForm.Contact);
 
-            //Добавить новые данные в список
-            _project.List.Insert(selectedIndex, updatedContact);
-            ContactsListBox.Items.Insert(selectedIndex, updatedContact.Surname);
-            ProjectSave();
+                ProjectSave();
+            }
         }
 
+        /// <summary>
+        ///     Конпка удаления контакта
+        /// </summary>
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
@@ -94,9 +106,13 @@ namespace ContactsApp.UI
             }
         }
 
+        /// <summary>
+        ///     ListBox контактов: выбранный элемент выводится на TextBox
+        /// </summary>
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedIndex = ContactsListBox.SelectedIndex;
+            var selectedIndex = ContactsListBox.SelectedIndex;
+
             // если выбрали элемент то вывести их на текст боксах
             if (ContactsListBox.SelectedIndex != -1)
             {
@@ -109,7 +125,6 @@ namespace ContactsApp.UI
                 VkIdTextBox.Text = selectedContact.VkId;
             }
             //если выбранный элемент -1 значит элемента уже нет в списке,
-            //следует очистить текстбоксы 
             else
             {
                 SurnameTextBox.Text = "";
@@ -120,7 +135,9 @@ namespace ContactsApp.UI
             }
         }
 
-        //временная кнопка для тестов создает 3 обьекта
+        /// <summary>
+        ///     Тестовая кнопка: создает 3 шаблонных контакта
+        /// </summary>
         private void TestButton_Click(object sender, EventArgs e)
         {
             var newContact = new Contact("Evsyukov", "Ivan", new DateTime(1998, 7, 20),
@@ -141,21 +158,6 @@ namespace ContactsApp.UI
 
             _project.List.Add(newContact3);
             ContactsListBox.Items.Add(newContact3.Surname);
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void VkIdTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PhoneTextBox_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
         }
     }
 }

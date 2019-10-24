@@ -193,7 +193,6 @@
             this.Controls.Add(this.SurnameLabel);
             this.Name = "AddEditContact";
             this.Text = "AddEditContact";
-            this.Load += new System.EventHandler(this.AddEditContact_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
