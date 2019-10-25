@@ -38,6 +38,8 @@
             this.VkIdTextBox = new System.Windows.Forms.TextBox();
             this.BirthdayDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.PhoneTextBox = new System.Windows.Forms.MaskedTextBox();
+            this.FindLable = new System.Windows.Forms.Label();
+            this.FindTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // ContactsListBox
@@ -219,11 +221,30 @@
             this.PhoneTextBox.Size = new System.Drawing.Size(359, 20);
             this.PhoneTextBox.TabIndex = 11;
             // 
+            // FindLable
+            // 
+            this.FindLable.AutoSize = true;
+            this.FindLable.Location = new System.Drawing.Point(9, 43);
+            this.FindLable.Name = "FindLable";
+            this.FindLable.Size = new System.Drawing.Size(30, 13);
+            this.FindLable.TabIndex = 18;
+            this.FindLable.Text = "Find:";
+            // 
+            // FindTextBox
+            // 
+            this.FindTextBox.Location = new System.Drawing.Point(45, 40);
+            this.FindTextBox.Name = "FindTextBox";
+            this.FindTextBox.Size = new System.Drawing.Size(170, 20);
+            this.FindTextBox.TabIndex = 19;
+            this.FindTextBox.TextChanged += new System.EventHandler(this.FindTextBox_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(665, 433);
+            this.Controls.Add(this.FindTextBox);
+            this.Controls.Add(this.FindLable);
             this.Controls.Add(this.PhoneTextBox);
             this.Controls.Add(this.VkIdTextBox);
             this.Controls.Add(this.SurnameLabel);
@@ -266,6 +287,8 @@
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.MaskedTextBox PhoneTextBox;
         private System.Windows.Forms.TextBox SurnameTextBox;
+        private System.Windows.Forms.Label FindLable;
+        private System.Windows.Forms.TextBox FindTextBox;
     }
 }
 

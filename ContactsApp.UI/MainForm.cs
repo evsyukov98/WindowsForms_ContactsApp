@@ -29,10 +29,8 @@ namespace ContactsApp.UI
         {
             _project = ProjectManager<Project>.Deserializer(@"ContactsApp.notes");
 
-            foreach (var contact in _project.List)
-            {
-                ContactsListBox.Items.Add(contact.Surname);
-            }
+            ContactsListBox.DataSource = _project.List;
+            ContactsListBox.DisplayMember = "Surname";
         }
 
         /// <summary>
@@ -50,11 +48,9 @@ namespace ContactsApp.UI
         private void ResetListBox()
         {
             _project.List = _project.List.OrderBy(contact => contact.Surname).ToList();
-            ContactsListBox.Items.Clear();
-            foreach (var contact in _project.List)
-            {
-                ContactsListBox.Items.Add(contact.Surname);
-            }
+            
+            ContactsListBox.DataSource = _project.List;
+            ContactsListBox.DisplayMember = "Surname";
         }
 
         /// <summary>
@@ -142,21 +138,24 @@ namespace ContactsApp.UI
             var newContact = new Contact("Evsyukov", "Ivan", new DateTime(1998, 7, 20),
                 "+7(777)777-77-77",
                 "ivan@mail.com", "vkid");
-
             _project.List.Add(newContact);
-            ContactsListBox.Items.Add(newContact.Surname);
+
             var newContact2 = new Contact("Tamirov", "Leon", new DateTime(1978, 11, 10),
                 "+7(777)777-77-77",
                 "dagestan@mail.com", "vkidd");
-
             _project.List.Add(newContact2);
-            ContactsListBox.Items.Add(newContact2.Surname);
+
             var newContact3 = new Contact("Uchiha", "Sasuke", new DateTime(2012, 1, 30),
                 "+7(777)777-77-77",
                 "chidori@mail.com", "vkisd");
-
             _project.List.Add(newContact3);
-            ContactsListBox.Items.Add(newContact3.Surname);
+
+            ResetListBox();
+        }
+
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
