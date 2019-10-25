@@ -202,7 +202,7 @@
             this.BirthdayDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BirthdayDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.BirthdayDateTimePicker.Location = new System.Drawing.Point(284, 120);
-            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2019, 10, 25, 0, 0, 0, 0);
+            this.BirthdayDateTimePicker.MaxDate = new System.DateTime(2020, 10, 25, 0, 0, 0, 0);
             this.BirthdayDateTimePicker.MinimumSize = new System.Drawing.Size(109, 20);
             this.BirthdayDateTimePicker.Name = "BirthdayDateTimePicker";
             this.BirthdayDateTimePicker.Size = new System.Drawing.Size(109, 20);

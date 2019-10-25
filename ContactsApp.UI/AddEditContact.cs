@@ -22,6 +22,7 @@ namespace ContactsApp.UI
 
         /// <summary>
         /// Создает экземпляр класса Contact
+        /// Изменяет все TextBox 
         /// </summary>
         public Contact Contact
         {
@@ -31,6 +32,7 @@ namespace ContactsApp.UI
                 if (value != null)
                 {
                     _contact = value;
+
                     SurnameTextBox.Text = Contact.Surname;
                     NameTextBox.Text = Contact.Name;
                     BirthdayTimePicker.Value = Contact.Birthday;
@@ -41,6 +43,9 @@ namespace ContactsApp.UI
             }
         }
 
+        /// <summary>
+        /// Вызывает конструктор класса
+        /// </summary>
         private void OkButton_Click(object sender, EventArgs e)
         {
             Contact = new Contact(SurnameTextBox.Text, NameTextBox.Text,

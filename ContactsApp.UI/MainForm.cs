@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
@@ -35,13 +36,25 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Сохранить список контактов
+        ///     Сохранить список контактов, обновляет в форме.
         /// </summary>
         private void ProjectSave()
         {
-            //TODO: сортировка
-            //_project.List = _project.List.OrderBy(u => u.Surname).ToList();
+            ResetListBox();
             ProjectManager<Project>.Serializer(_project, @"ContactsApp.notes");
+        }
+
+        /// <summary>
+        ///     Сортирует, обновляет форму;
+        /// </summary>
+        private void ResetListBox()
+        {
+            _project.List = _project.List.OrderBy(contact => contact.Surname).ToList();
+            ContactsListBox.Items.Clear();
+            foreach (var contact in _project.List)
+            {
+                ContactsListBox.Items.Add(contact.Surname);
+            }
         }
 
         /// <summary>
@@ -56,9 +69,6 @@ namespace ContactsApp.UI
                 //Добавить новые данные в список
                 _project.List.Add(addForm.Contact);
 
-                //Добавить новые данные в UI
-                ContactsListBox.Items.Add(addForm.Contact.Surname);
-
                 //сохранить все в "ContactsApp.notes"
                 ProjectSave();
             }
@@ -69,23 +79,17 @@ namespace ContactsApp.UI
         /// </summary>
         private void EditButton_Click(object sender, EventArgs e)
         {
-            // индекс выбранного в ListBox
             var selectedIndex = ContactsListBox.SelectedIndex;
-            // выбранный контакт = список.контактов[индекс выбранного в ListBox]
+
+            // выбранный контакт 
             var selectedContact = _project.List[selectedIndex];
 
             // создаем экземпляр формы, сразу передаем выбранный контакт 
             var editForm = new AddEditContact {Contact = selectedContact};
 
-
             if (editForm.ShowDialog() == DialogResult.OK)
             {
-                //Удалить старые данные по выбранному индексу
-                ContactsListBox.Items.RemoveAt(selectedIndex);
                 _project.List.RemoveAt(selectedIndex);
-
-                //Добавить новые данные в список
-                ContactsListBox.Items.Insert(selectedIndex, editForm.Contact.Surname);
                 _project.List.Insert(selectedIndex, editForm.Contact);
 
                 ProjectSave();
@@ -101,7 +105,6 @@ namespace ContactsApp.UI
             if (selectedIndex != -1)
             {
                 _project.List.RemoveAt(selectedIndex);
-                ContactsListBox.Items.RemoveAt(selectedIndex);
                 ProjectSave();
             }
         }
@@ -111,12 +114,9 @@ namespace ContactsApp.UI
         /// </summary>
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedIndex = ContactsListBox.SelectedIndex;
-
-            // если выбрали элемент то вывести их на текст боксах
             if (ContactsListBox.SelectedIndex != -1)
             {
-                var selectedContact = _project.List[selectedIndex];
+                var selectedContact = _project.List[ContactsListBox.SelectedIndex];
                 SurnameTextBox.Text = selectedContact.Surname;
                 NameTextBox.Text = selectedContact.Name;
                 BirthdayDateTimePicker.Value = selectedContact.Birthday;
@@ -124,7 +124,6 @@ namespace ContactsApp.UI
                 MailTextBox.Text = selectedContact.Mail;
                 VkIdTextBox.Text = selectedContact.VkId;
             }
-            //если выбранный элемент -1 значит элемента уже нет в списке,
             else
             {
                 SurnameTextBox.Text = "";
