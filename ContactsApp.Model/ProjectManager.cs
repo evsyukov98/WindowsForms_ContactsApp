@@ -33,8 +33,7 @@ namespace ContactsApp.Model
             JsonSerializer serializer = new JsonSerializer();
 
             //Открываем поток для чтения из файла с указанием пути
-            using (StreamReader sr = new StreamReader(path)
-            )
+            using (StreamReader sr = new StreamReader(path))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 serializer.NullValueHandling = NullValueHandling.Include;

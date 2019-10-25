@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using ContactsApp.Model;
@@ -27,10 +29,26 @@ namespace ContactsApp.UI
         /// </summary>
         private void ProjectLoad()
         {
-            _project = ProjectManager<Project>.Deserializer(@"ContactsApp.notes");
+            try
+            {
+                _project = ProjectManager<Project>.Deserializer(@"ContactsApp.notes");
+            }
+            catch
+            {
+                var fileInf = new FileInfo(@"ContactsApp.notes");
+                if (!fileInf.Exists)
+                {
+                    fileInf.Create().Close();
+                }
+            }
 
+            if (_project == null)
+            {
+                _project = new Project { List = new List<Contact>() };
+            }
             ContactsListBox.DataSource = _project.List;
             ContactsListBox.DisplayMember = "Surname";
+
         }
 
         /// <summary>
@@ -48,7 +66,7 @@ namespace ContactsApp.UI
         private void ResetListBox()
         {
             _project.List = _project.List.OrderBy(contact => contact.Surname).ToList();
-            
+
             ContactsListBox.DataSource = _project.List;
             ContactsListBox.DisplayMember = "Surname";
         }
@@ -138,16 +156,19 @@ namespace ContactsApp.UI
             var newContact = new Contact("Evsyukov", "Ivan", new DateTime(1998, 7, 20),
                 "+7(777)777-77-77",
                 "ivan@mail.com", "vkid");
+
             _project.List.Add(newContact);
 
             var newContact2 = new Contact("Tamirov", "Leon", new DateTime(1978, 11, 10),
                 "+7(777)777-77-77",
                 "dagestan@mail.com", "vkidd");
+
             _project.List.Add(newContact2);
 
             var newContact3 = new Contact("Uchiha", "Sasuke", new DateTime(2012, 1, 30),
                 "+7(777)777-77-77",
                 "chidori@mail.com", "vkisd");
+
             _project.List.Add(newContact3);
 
             ResetListBox();
@@ -155,7 +176,6 @@ namespace ContactsApp.UI
 
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

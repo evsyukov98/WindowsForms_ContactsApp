@@ -102,9 +102,11 @@
             // 
             this.BirthdayTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.BirthdayTimePicker.Location = new System.Drawing.Point(102, 94);
+            this.BirthdayTimePicker.MaxDate = new System.DateTime(2019, 10, 25, 0, 0, 0, 0);
             this.BirthdayTimePicker.Name = "BirthdayTimePicker";
             this.BirthdayTimePicker.Size = new System.Drawing.Size(96, 20);
             this.BirthdayTimePicker.TabIndex = 16;
+            this.BirthdayTimePicker.Value = new System.DateTime(2019, 10, 25, 0, 0, 0, 0);
             this.BirthdayTimePicker.ValueChanged += new System.EventHandler(this.BirthdayTimePicker_ValueChanged);
             // 
             // VkIdTextBox
