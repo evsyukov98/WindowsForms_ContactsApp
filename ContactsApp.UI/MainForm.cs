@@ -44,11 +44,11 @@ namespace ContactsApp.UI
 
             if (_project == null)
             {
-                _project = new Project { List = new List<Contact>() };
+                _project = new Project {List = new List<Contact>()};
             }
-            ContactsListBox.DataSource = _project.List;
-            ContactsListBox.DisplayMember = "Surname";
 
+            ContactsListBox.DisplayMember = "Surname";
+            ContactsListBox.DataSource = _project.List;
         }
 
         /// <summary>
@@ -176,6 +176,9 @@ namespace ContactsApp.UI
 
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
+            var projectList = _project.List;
+            var findList = projectList.Where(contact => contact.Surname.StartsWith(FindTextBox.Text)).ToList();
+            ContactsListBox.DataSource = findList;
         }
     }
 }
