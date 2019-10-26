@@ -69,7 +69,7 @@ namespace ContactsApp.UI
         {
             OkButton.Enabled = false;
 
-            var patternNames = "^[A-Z][a-z]*$";
+            var patternNames = "^[A-Z][a-z]{0,30}$";
             if (!Regex.IsMatch(SurnameTextBox.Text, patternNames))
             {
                 SurnameTextBox.BackColor = Color.Red;

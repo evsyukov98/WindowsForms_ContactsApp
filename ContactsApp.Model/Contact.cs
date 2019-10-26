@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-// ReSharper disable All
-
 namespace ContactsApp.Model
 {
     /// <summary>
@@ -60,7 +58,7 @@ namespace ContactsApp.Model
             get => _surname;
             set
             {
-                var pattern = "[A-Z][a-z]*";
+                var pattern = "^[A-Z][a-z]{0,30}$";
                 if (Regex.IsMatch(value, pattern))
                 {
                     _surname = value;
@@ -79,7 +77,7 @@ namespace ContactsApp.Model
             get => _name;
             set
             {
-                var pattern = "[A-Z][a-z]*";
+                var pattern = "^[A-Z][a-z]{0,30}$";
 
                 if (Regex.IsMatch(value, pattern))
                 {

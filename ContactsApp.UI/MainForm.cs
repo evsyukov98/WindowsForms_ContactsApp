@@ -11,12 +11,12 @@ namespace ContactsApp.UI
     public partial class MainForm : Form
     {
         /// <summary>
-        ///     Хранит список контактов
+        ///     Хранит список контактов.
         /// </summary>
         private Project _project;
 
         /// <summary>
-        ///     Функция инициализации
+        ///     Функция инициализации.
         /// </summary>
         public MainForm()
         {
@@ -72,7 +72,7 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Кнопка добавления контакта
+        ///     Кнопка добавления контакта.
         /// </summary>
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -89,7 +89,7 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Кнопка редактирования контакта
+        ///     Кнопка редактирования контакта.
         /// </summary>
         private void EditButton_Click(object sender, EventArgs e)
         {
@@ -111,7 +111,7 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Конпка удаления контакта
+        ///     Конпка удаления контакта.
         /// </summary>
         private void DeleteButton_Click(object sender, EventArgs e)
         {
@@ -124,7 +124,7 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     ListBox контактов: выбранный элемент выводится на TextBox
+        ///     ListBox контактов: выбранный элемент выводится на TextBox.
         /// </summary>
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -149,7 +149,19 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Тестовая кнопка: создает 3 шаблонных контакта
+        ///     Поиск по фамилии.
+        /// </summary>
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            var projectList = _project.List;
+            var findList = projectList
+                .Where(contact => contact.Surname.StartsWith(FindTextBox.Text)).ToList();
+
+            ContactsListBox.DataSource = findList;
+        }
+
+        /// <summary>
+        ///     Тестовая кнопка: создает 3 шаблонных контакта.
         /// </summary>
         private void TestButton_Click(object sender, EventArgs e)
         {
@@ -172,13 +184,6 @@ namespace ContactsApp.UI
             _project.List.Add(newContact3);
 
             ResetListBox();
-        }
-
-        private void FindTextBox_TextChanged(object sender, EventArgs e)
-        {
-            var projectList = _project.List;
-            var findList = projectList.Where(contact => contact.Surname.StartsWith(FindTextBox.Text)).ToList();
-            ContactsListBox.DataSource = findList;
         }
     }
 }
