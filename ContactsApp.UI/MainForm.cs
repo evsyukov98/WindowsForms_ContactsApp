@@ -172,29 +172,45 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Тестовая кнопка: создает 3 шаблонных контакта.
+        ///     Меню выход
         /// </summary>
-        private void TestButton_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var newContact = new Contact("Evsyukov", "Ivan", new DateTime(1998, 7, 20),
-                "+7(777)777-77-77",
-                "ivan@mail.com", "vkid");
+            this.Close();
+            ProjectSave();
+        }
 
-            _project.List.Add(newContact);
+        /// <summary>
+        ///     Меню добавление контакта
+        /// </summary>
+        private void addContactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddButton_Click(sender, e);
+        }
 
-            var newContact2 = new Contact("Tamirov", "Leon", new DateTime(1978, 11, 10),
-                "+7(777)777-77-77",
-                "dagestan@mail.com", "vkidd");
+        /// <summary>
+        ///     Меню редактирование контакта
+        /// </summary>
+        private void editContactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditButton_Click(sender, e);
+        }
 
-            _project.List.Add(newContact2);
+        /// <summary>
+        ///     Меню удалить контакт
+        /// </summary>
+        private void removeContactToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteButton_Click(sender, e);
+        }
 
-            var newContact3 = new Contact("Uchiha", "Sasuke", new DateTime(2012, 1, 30),
-                "+7(777)777-77-77",
-                "chidori@mail.com", "vkisd");
-
-            _project.List.Add(newContact3);
-
-            ResetListBox();
+        /// <summary>
+        ///     Меню открыть форму About 
+        /// </summary>
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var aboutForm = new About();
+            aboutForm.ShowDialog();
         }
     }
 }

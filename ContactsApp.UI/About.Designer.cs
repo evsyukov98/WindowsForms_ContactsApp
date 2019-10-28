@@ -75,6 +75,7 @@
             this.MailHyperlink.TabIndex = 3;
             this.MailHyperlink.TabStop = true;
             this.MailHyperlink.Text = "evsyukov@list.ru";
+            this.MailHyperlink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.MailHyperlink_LinkClicked);
             // 
             // emailLabel
             // 
@@ -103,6 +104,7 @@
             this.GithubHyperlink.TabIndex = 6;
             this.GithubHyperlink.TabStop = true;
             this.GithubHyperlink.Text = "https://github.com/evsyukov/ContactsApp";
+            this.GithubHyperlink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.GithubHyperlink_LinkClicked);
             // 
             // DateLabel
             // 
@@ -127,6 +129,7 @@
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.ContactsAppLabel);
             this.Name = "About";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             this.ResumeLayout(false);
             this.PerformLayout();
