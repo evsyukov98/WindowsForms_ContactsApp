@@ -119,6 +119,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(397, 258);
             this.Controls.Add(this.DateLabel);
             this.Controls.Add(this.GithubHyperlink);
@@ -128,7 +130,12 @@
             this.Controls.Add(this.AuthorLabel);
             this.Controls.Add(this.VersionLabel);
             this.Controls.Add(this.ContactsAppLabel);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(413, 297);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(413, 297);
             this.Name = "About";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
             this.ResumeLayout(false);

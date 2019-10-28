@@ -48,6 +48,8 @@
             this.removeContactToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BirthdayListBox = new System.Windows.Forms.ListBox();
+            this.BirthdayList = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,8 +68,8 @@
             // 
             // AddButton
             // 
-            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddButton.Location = new System.Drawing.Point(11, 389);
+            this.AddButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.AddButton.Location = new System.Drawing.Point(12, 396);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(64, 23);
             this.AddButton.TabIndex = 14;
@@ -77,8 +79,8 @@
             // 
             // EditButton
             // 
-            this.EditButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.EditButton.Location = new System.Drawing.Point(81, 389);
+            this.EditButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.EditButton.Location = new System.Drawing.Point(82, 396);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(64, 23);
             this.EditButton.TabIndex = 15;
@@ -88,8 +90,8 @@
             // 
             // DeleteButton
             // 
-            this.DeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.DeleteButton.Location = new System.Drawing.Point(151, 389);
+            this.DeleteButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.DeleteButton.Location = new System.Drawing.Point(152, 396);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(64, 23);
             this.DeleteButton.TabIndex = 16;
@@ -260,7 +262,7 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -277,21 +279,21 @@
             this.addContactToolStripMenuItem.Name = "addContactToolStripMenuItem";
             this.addContactToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.addContactToolStripMenuItem.Text = "Add Contact";
-            this.addContactToolStripMenuItem.Click += new System.EventHandler(this.addContactToolStripMenuItem_Click);
+            this.addContactToolStripMenuItem.Click += new System.EventHandler(this.AddContactToolStripMenuItem_Click);
             // 
             // editContactToolStripMenuItem
             // 
             this.editContactToolStripMenuItem.Name = "editContactToolStripMenuItem";
             this.editContactToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.editContactToolStripMenuItem.Text = "Edit Contact";
-            this.editContactToolStripMenuItem.Click += new System.EventHandler(this.editContactToolStripMenuItem_Click);
+            this.editContactToolStripMenuItem.Click += new System.EventHandler(this.EditContactToolStripMenuItem_Click);
             // 
             // removeContactToolStripMenuItem
             // 
             this.removeContactToolStripMenuItem.Name = "removeContactToolStripMenuItem";
             this.removeContactToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.removeContactToolStripMenuItem.Text = "Remove Contact";
-            this.removeContactToolStripMenuItem.Click += new System.EventHandler(this.removeContactToolStripMenuItem_Click);
+            this.removeContactToolStripMenuItem.Click += new System.EventHandler(this.RemoveContactToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -306,13 +308,38 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            // 
+            // BirthdayListBox
+            // 
+            this.BirthdayListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BirthdayListBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.BirthdayListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.BirthdayListBox.FormattingEnabled = true;
+            this.BirthdayListBox.Location = new System.Drawing.Point(271, 363);
+            this.BirthdayListBox.MaximumSize = new System.Drawing.Size(382, 65);
+            this.BirthdayListBox.MinimumSize = new System.Drawing.Size(382, 65);
+            this.BirthdayListBox.Name = "BirthdayListBox";
+            this.BirthdayListBox.Size = new System.Drawing.Size(382, 65);
+            this.BirthdayListBox.TabIndex = 21;
+            // 
+            // BirthdayList
+            // 
+            this.BirthdayList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BirthdayList.AutoSize = true;
+            this.BirthdayList.Location = new System.Drawing.Point(268, 347);
+            this.BirthdayList.Name = "BirthdayList";
+            this.BirthdayList.Size = new System.Drawing.Size(132, 13);
+            this.BirthdayList.TabIndex = 22;
+            this.BirthdayList.Text = "Сегодня день рождения:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 433);
+            this.ClientSize = new System.Drawing.Size(665, 440);
+            this.Controls.Add(this.BirthdayList);
+            this.Controls.Add(this.BirthdayListBox);
             this.Controls.Add(this.FindTextBox);
             this.Controls.Add(this.FindLable);
             this.Controls.Add(this.PhoneTextBox);
@@ -333,6 +360,7 @@
             this.Controls.Add(this.SurnameTextBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(678, 376);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ContactsApp";
@@ -371,6 +399,8 @@
         private System.Windows.Forms.ToolStripMenuItem removeContactToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ListBox BirthdayListBox;
+        private System.Windows.Forms.Label BirthdayList;
     }
 }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
@@ -24,6 +23,7 @@ namespace ContactsApp.UI
         {
             InitializeComponent();
             ProjectLoad();
+            CheckBirthday();
         }
 
         /// <summary>
@@ -49,6 +49,7 @@ namespace ContactsApp.UI
                 _project = new Project {List = new List<Contact>()};
             }
 
+            _project.List = _project.SortedList();
             ContactsListBox.DisplayMember = "Surname";
             ContactsListBox.DataSource = _project.List;
         }
@@ -67,10 +68,18 @@ namespace ContactsApp.UI
         /// </summary>
         private void ResetListBox()
         {
-            _project.List = _project.List.OrderBy(contact => contact.Surname).ToList();
-
+            _project.List = _project.SortedList();
             ContactsListBox.DataSource = _project.List;
-            ContactsListBox.DisplayMember = "Surname";
+        }
+
+
+        ///<summary>
+        ///
+        /// </summary>
+        private void CheckBirthday()
+        {
+            BirthdayListBox.DisplayMember = "Surname";
+            BirthdayListBox.DataSource = _project.BirthdayList();
         }
 
         /// <summary>
@@ -125,7 +134,7 @@ namespace ContactsApp.UI
 
             var result = MessageBox.Show(
                 $"Are you sure you want to remove:{_project.List[selectedIndex].Surname}",
-                "Remove", MessageBoxButtons.OKCancel);
+                "Warning", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.OK)
             {
@@ -164,26 +173,22 @@ namespace ContactsApp.UI
         /// </summary>
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-            var projectList = _project.List;
-            var findList = projectList
-                .Where(contact => contact.Surname.StartsWith(FindTextBox.Text)).ToList();
-
-            ContactsListBox.DataSource = findList;
+            ContactsListBox.DataSource = _project.SortedList(FindTextBox.Text);
         }
 
         /// <summary>
         ///     Меню выход
         /// </summary>
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
             ProjectSave();
         }
 
         /// <summary>
         ///     Меню добавление контакта
         /// </summary>
-        private void addContactToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddButton_Click(sender, e);
         }
@@ -191,7 +196,7 @@ namespace ContactsApp.UI
         /// <summary>
         ///     Меню редактирование контакта
         /// </summary>
-        private void editContactToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EditButton_Click(sender, e);
         }
@@ -199,15 +204,15 @@ namespace ContactsApp.UI
         /// <summary>
         ///     Меню удалить контакт
         /// </summary>
-        private void removeContactToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteButton_Click(sender, e);
         }
 
         /// <summary>
-        ///     Меню открыть форму About 
+        ///     Меню открыть форму About
         /// </summary>
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var aboutForm = new About();
             aboutForm.ShowDialog();

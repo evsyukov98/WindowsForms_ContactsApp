@@ -194,6 +194,7 @@
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.SurnameLabel);
             this.Name = "AddEditContact";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddEditContact";
             this.ResumeLayout(false);
             this.PerformLayout();
