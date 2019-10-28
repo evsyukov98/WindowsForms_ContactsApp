@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ContactsApp.Model
 {
@@ -10,6 +11,6 @@ namespace ContactsApp.Model
         /// <summary>
         /// Список контактов.
         /// </summary>
-        public List<Contact> List { get; set; }
+        public List<Contact> List { get;set; }
     }
 }

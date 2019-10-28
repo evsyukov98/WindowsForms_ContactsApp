@@ -8,8 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{730E6860-D4F9-4067-81D7-477D06D662D0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ContactsApp.UnitTest</RootNamespace>
-    <AssemblyName>ContactsApp.UnitTest</AssemblyName>
+    <RootNamespace>ContactsApp.UnitTests</RootNamespace>
+    <AssemblyName>ContactsApp.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,8 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactTest.cs" />
-    <Compile Include="ProjectTest.cs" />
+    <Compile Include="ContactTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

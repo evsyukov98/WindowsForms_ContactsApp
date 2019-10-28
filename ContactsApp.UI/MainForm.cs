@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
+// ReSharper disable All
+
 namespace ContactsApp.UI
 {
     //partial вторая часть кода находиться в Form1.Designer.cs
@@ -116,7 +118,16 @@ namespace ContactsApp.UI
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
-            if (selectedIndex != -1)
+            if (selectedIndex == -1)
+            {
+                return;
+            }
+
+            var result = MessageBox.Show(
+                $"Are you sure you want to remove:{_project.List[selectedIndex].Surname}",
+                "Remove", MessageBoxButtons.OKCancel);
+
+            if (result == DialogResult.OK)
             {
                 _project.List.RemoveAt(selectedIndex);
                 ProjectSave();

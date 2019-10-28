@@ -2,18 +2,17 @@
 using ContactsApp.Model;
 using NUnit.Framework;
 
-namespace ContactsApp.UnitTest
+namespace ContactsApp.UnitTests
 {
-    //для того чтобы отличить класс для тестов  и обычные классы
     [TestFixture]
-    internal class ContactTest
+    internal class ContactTests
     {
         [SetUp]
         public void InitContact()
         {
             _contact = new Contact("Surename", "Name",
-                new DateTime(1967, 7, 20), "+7(777)777-77-77",
-                "ml@mail.com", "id");
+                new DateTime(1987, 7, 20), "+7(777)777-77-77",
+                "mail@mail.com", "id");
         }
 
         private Contact _contact;
@@ -50,7 +49,7 @@ namespace ContactsApp.UnitTest
 
         [TestCase("05/05/2025", "Исключение, если дата больше текущей",
             TestName = "Присвоение даты больше текущей")]
-        public void TestBirthday_ArgumentException(string wrongString, string message)
+        public void TestBirthdaySet_ArgumentException(string wrongString, string message)
         {
             var wrongBirthday = Convert.ToDateTime(wrongString);
             Assert.Throws<ArgumentException>(
@@ -64,7 +63,7 @@ namespace ContactsApp.UnitTest
             TestName = "Номер без скобок")]
         [TestCase("+7(999)4995103", "Исключение, если номер без дифисов",
             TestName = "Номер без дифиса")]
-        public void TestPhone_ArgumentException(string wrongPhone, string message)
+        public void TestPhoneSet_ArgumentException(string wrongPhone, string message)
         {
             Assert.Throws<ArgumentException>(
                 () => { _contact.Phone = wrongPhone; },
@@ -79,7 +78,7 @@ namespace ContactsApp.UnitTest
             TestName = "Почта без азвания сайта")]
         [TestCase("evsyukov@mail", "Исключение, если почта не имеет домена",
             TestName = "Почта без домена")]
-        public void TestMail_ArgumentException(string wrongMail, string message)
+        public void TestMailSet_ArgumentException(string wrongMail, string message)
         {
             Assert.Throws<ArgumentException>(
                 () => { _contact.Mail = wrongMail; },
@@ -90,25 +89,11 @@ namespace ContactsApp.UnitTest
             TestName = "VkID пустая строка")]
         [TestCase("idevsyu.kov", "Исключение, если VkID не буква или цифра ",
             TestName = "VkID с другими символами")]
-        public void TestVkId_ArgumentException(string wrongVkId, string message)
+        public void TestVkIdSet_ArgumentException(string wrongVkId, string message)
         {
             Assert.Throws<ArgumentException>(
                 () => { _contact.Mail = wrongVkId; },
                 message);
         }
-
-        //[Test(Description = "Позитивный тест геттера Surname")]
-        //public void Test_Surname_Get_CorrectValue()
-        //{
-        //    var expected = "Smirnov";
-        //    var contact = new Contact("Surename", "Name",
-        //        new DateTime(1967, 7, 20), "+7(777)777-77-77",
-        //        "ml@mail.com", "id") {Surname = expected};
-
-        //    var actual = contact.Surname;
-
-        //    Assert.AreEqual(expected, actual,
-        //        "Геттер Surname возвращает неправильную фамилию");
-        //}
     }
 }
