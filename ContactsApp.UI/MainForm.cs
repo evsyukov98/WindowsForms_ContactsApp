@@ -73,8 +73,7 @@ namespace ContactsApp.UI
         }
 
 
-        ///<summary>
-        ///
+        /// <summary>
         /// </summary>
         private void CheckBirthday()
         {
@@ -133,7 +132,7 @@ namespace ContactsApp.UI
             }
 
             var result = MessageBox.Show(
-                $"Are you sure you want to remove:{_project.List[selectedIndex].Surname}",
+                $"Are you sure you want to remove: {_project.List[selectedIndex].Surname}",
                 "Warning", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.OK)

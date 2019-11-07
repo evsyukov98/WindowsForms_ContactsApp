@@ -9,7 +9,7 @@ namespace ContactsApp.Consol
         private static void Main()
         {
             var project = new Project {List = new List<Contact>()};
-
+            
 
             var stop = true;
             while (stop)

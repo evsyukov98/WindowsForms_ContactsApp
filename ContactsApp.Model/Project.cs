@@ -23,10 +23,10 @@ namespace ContactsApp.Model
         public List<Contact> SortedList(string substring)
         {
             var findSortedList = from contact in List
-                where contact.Surname.StartsWith(substring,
-                    StringComparison.OrdinalIgnoreCase)
-                orderby contact.Surname
-                select contact;
+                                 where contact.Surname.StartsWith(substring,
+                                     StringComparison.OrdinalIgnoreCase)
+                                 orderby contact.Surname
+                                 select contact;
 
             return findSortedList.ToList();
         }
