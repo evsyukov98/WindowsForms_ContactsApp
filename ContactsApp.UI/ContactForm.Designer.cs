@@ -1,6 +1,6 @@
 ﻿namespace ContactsApp.UI
 {
-    partial class AddEditContact
+    partial class ContactForm
     {
         /// <summary>
         /// Required designer variable.
@@ -143,7 +143,6 @@
             // 
             // OkButton
             // 
-            this.OkButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.OkButton.Enabled = false;
             this.OkButton.Location = new System.Drawing.Point(235, 212);
             this.OkButton.Name = "OkButton";
@@ -174,7 +173,7 @@
             this.PhoneTextBox.TabIndex = 17;
             this.PhoneTextBox.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.PhoneTextBox_MaskInputRejected);
             // 
-            // AddEditContact
+            // ContactForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +192,7 @@
             this.Controls.Add(this.BirthdayLabel);
             this.Controls.Add(this.NameLabel);
             this.Controls.Add(this.SurnameLabel);
-            this.Name = "AddEditContact";
+            this.Name = "ContactForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddEditContact";
             this.ResumeLayout(false);

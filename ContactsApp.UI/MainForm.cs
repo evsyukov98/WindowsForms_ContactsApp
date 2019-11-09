@@ -4,11 +4,10 @@ using System.IO;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
-// ReSharper disable All
+
 
 namespace ContactsApp.UI
 {
-    //partial вторая часть кода находиться в Form1.Designer.cs
     public partial class MainForm : Form
     {
         /// <summary>
@@ -33,14 +32,14 @@ namespace ContactsApp.UI
         {
             try
             {
-                _project = ProjectManager<Project>.Deserializer(@"ContactsApp.notes");
+                _project = ProjectManager<Project>.LoadFromFile(@"ContactsApp.notes");
             }
             catch
             {
-                var fileInf = new FileInfo(@"ContactsApp.notes");
-                if (!fileInf.Exists)
+                var fileInfo = new FileInfo(@"ContactsApp.notes");
+                if (!fileInfo.Exists)
                 {
-                    fileInf.Create().Close();
+                    fileInfo.Create().Close();
                 }
             }
 
@@ -49,7 +48,7 @@ namespace ContactsApp.UI
                 _project = new Project {List = new List<Contact>()};
             }
 
-            _project.List = _project.SortedList();
+            _project.List = _project.SortList();
             ContactsListBox.DisplayMember = "Surname";
             ContactsListBox.DataSource = _project.List;
         }
@@ -60,7 +59,7 @@ namespace ContactsApp.UI
         private void ProjectSave()
         {
             ResetListBox();
-            ProjectManager<Project>.Serializer(_project, @"ContactsApp.notes");
+            ProjectManager<Project>.SaveToFile(_project, @"ContactsApp.notes");
         }
 
         /// <summary>
@@ -68,12 +67,13 @@ namespace ContactsApp.UI
         /// </summary>
         private void ResetListBox()
         {
-            _project.List = _project.SortedList();
+            _project.List = _project.SortList();
             ContactsListBox.DataSource = _project.List;
         }
 
 
         /// <summary>
+        ///  Проверить день рождения.
         /// </summary>
         private void CheckBirthday()
         {
@@ -82,34 +82,30 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
-        ///     Кнопка добавления контакта.
+        ///     Добавление контакта.
         /// </summary>
-        private void AddButton_Click(object sender, EventArgs e)
+        private void AddContact()
         {
-            var addForm = new AddEditContact();
+            var addForm = new ContactForm();
 
             if (addForm.ShowDialog() == DialogResult.OK)
             {
-                //Добавить новые данные в список
                 _project.List.Add(addForm.Contact);
 
-                //сохранить все в "ContactsApp.notes"
                 ProjectSave();
             }
         }
 
         /// <summary>
-        ///     Кнопка редактирования контакта.
+        ///     Редактирования контакта.
         /// </summary>
-        private void EditButton_Click(object sender, EventArgs e)
+        private void EditContact()
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
 
-            // выбранный контакт 
             var selectedContact = _project.List[selectedIndex];
 
-            // создаем экземпляр формы, сразу передаем выбранный контакт 
-            var editForm = new AddEditContact {Contact = selectedContact};
+            var editForm = new ContactForm { Contact = selectedContact };
 
             if (editForm.ShowDialog() == DialogResult.OK)
             {
@@ -123,7 +119,7 @@ namespace ContactsApp.UI
         /// <summary>
         ///     Конпка удаления контакта.
         /// </summary>
-        private void DeleteButton_Click(object sender, EventArgs e)
+        private void DeleteContact()
         {
             var selectedIndex = ContactsListBox.SelectedIndex;
             if (selectedIndex == -1)
@@ -132,8 +128,8 @@ namespace ContactsApp.UI
             }
 
             var result = MessageBox.Show(
-                $"Are you sure you want to remove: {_project.List[selectedIndex].Surname}",
-                "Warning", MessageBoxButtons.OKCancel);
+                $@"Are you sure you want to remove: {_project.List[selectedIndex].Surname}",
+                @"Warning", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.OK)
             {
@@ -168,11 +164,20 @@ namespace ContactsApp.UI
         }
 
         /// <summary>
+        ///     Меню открыть форму About
+        /// </summary>
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
+        }
+
+        /// <summary>
         ///     Поиск по фамилии.
         /// </summary>
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-            ContactsListBox.DataSource = _project.SortedList(FindTextBox.Text);
+            ContactsListBox.DataSource = _project.SortList(FindTextBox.Text);
         }
 
         /// <summary>
@@ -187,9 +192,33 @@ namespace ContactsApp.UI
         /// <summary>
         ///     Меню добавление контакта
         /// </summary>
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            AddContact();
+        }
+
+        /// <summary>
+        ///     Меню редактирование контакта
+        /// </summary>
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            EditContact();
+        }
+
+        /// <summary>
+        ///     Меню удалить контакт
+        /// </summary>
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            DeleteContact();
+        }
+
+        /// <summary>
+        ///     Меню добавление контакта
+        /// </summary>
         private void AddContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddButton_Click(sender, e);
+            AddContact();
         }
 
         /// <summary>
@@ -197,7 +226,7 @@ namespace ContactsApp.UI
         /// </summary>
         private void EditContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EditButton_Click(sender, e);
+            EditContact();
         }
 
         /// <summary>
@@ -205,16 +234,9 @@ namespace ContactsApp.UI
         /// </summary>
         private void RemoveContactToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DeleteButton_Click(sender, e);
+            DeleteContact();
         }
 
-        /// <summary>
-        ///     Меню открыть форму About
-        /// </summary>
-        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var aboutForm = new About();
-            aboutForm.ShowDialog();
-        }
+        
     }
 }

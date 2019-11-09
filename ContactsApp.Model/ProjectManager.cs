@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
+
 // ReSharper disable All
 
 namespace ContactsApp.Model
@@ -13,7 +14,7 @@ namespace ContactsApp.Model
         /// <summary>
         ///     Метод, выполняющий сериализацию.
         /// </summary>
-        public static void Serializer(T name, string path)
+        public static void SaveToFile(T name, string path)
         {
             JsonSerializer serializer = new JsonSerializer();
             using (StreamWriter sw = new StreamWriter(path)
@@ -28,7 +29,7 @@ namespace ContactsApp.Model
         /// <summary>
         ///     Метод, выполняющий десериализацию.
         /// </summary>
-        public static T Deserializer(string path)
+        public static T LoadFromFile(string path)
         {
             JsonSerializer serializer = new JsonSerializer();
 

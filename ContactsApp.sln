@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Consol", "ContactsApp.Concole\ContactsApp.Consol.csproj", "{03B8B2C6-36ED-4A45-B693-D2066B561762}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.Model", "ContactsApp.Model\ContactsApp.Model.csproj", "{8C7088B8-37DC-40B9-8FC4-9591B8390697}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApp.UI", "ContactsApp.UI\ContactsApp.UI.csproj", "{4A8A5EC1-A950-48C2-A92C-DCD0CB0F10AC}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03B8B2C6-36ED-4A45-B693-D2066B561762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03B8B2C6-36ED-4A45-B693-D2066B561762}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03B8B2C6-36ED-4A45-B693-D2066B561762}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03B8B2C6-36ED-4A45-B693-D2066B561762}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8C7088B8-37DC-40B9-8FC4-9591B8390697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8C7088B8-37DC-40B9-8FC4-9591B8390697}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C7088B8-37DC-40B9-8FC4-9591B8390697}.Release|Any CPU.ActiveCfg = Release|Any CPU

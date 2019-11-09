@@ -6,15 +6,16 @@ using ContactsApp.Model;
 
 namespace ContactsApp.UI
 {
-    public partial class AddEditContact : Form
+    public partial class ContactForm : Form
     {
         /// <summary>
         /// Конструктор AddEditContact
         /// </summary>
-        public AddEditContact()
+        public ContactForm()
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// Класс Contact
         /// </summary>
@@ -52,14 +53,30 @@ namespace ContactsApp.UI
                 BirthdayTimePicker.Value, PhoneTextBox.Text, MailTextBox.Text,
                 VkIdTextBox.Text);
 
-            Close();
+            DialogResult = DialogResult.OK;
+            
         }
         /// <summary>
         /// Кнопка выхода
         /// </summary>
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            DialogResult = DialogResult.Cancel;
+            
+        }
+
+        /// <summary>
+        ///  Проверка на символы
+        /// </summary>
+        private bool RegexCheck(string pattern, TextBox textBox)
+        {
+            if (!Regex.IsMatch(textBox.Text, pattern))
+            {
+                textBox.BackColor = Color.LightPink;
+                return false;
+            }
+            textBox.BackColor = Color.White;
+            return true;
         }
 
         /// <summary>
@@ -70,50 +87,31 @@ namespace ContactsApp.UI
             OkButton.Enabled = false;
 
             var patternNames = "^[A-Z][a-z]{0,30}$";
-            if (!Regex.IsMatch(SurnameTextBox.Text, patternNames))
-            {
-                SurnameTextBox.BackColor = Color.Red;
-                return;
-            }
-
-            SurnameTextBox.BackColor = Color.White;
-
-
-            if (!Regex.IsMatch(NameTextBox.Text, patternNames))
-            {
-                NameTextBox.BackColor = Color.Red;
-                return;
-            }
-
-            NameTextBox.BackColor = Color.White;
-
-
             var patternMail =
                 @"^(?("")(""[^""]+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
                 @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9]{2,17}))$";
+            var patternVkId = @"\w{1,30}";
 
-            if (!Regex.IsMatch(MailTextBox.Text, patternMail))
-            {
-                MailTextBox.BackColor = Color.Red;
+            if (!RegexCheck(patternNames, SurnameTextBox))
                 return;
-            }
 
-            MailTextBox.BackColor = Color.White;
-
-            var pattern = @"[0-9a-zA-Z]+";
-            if (!Regex.IsMatch(VkIdTextBox.Text, pattern))
-            {
+            if (!RegexCheck(patternNames, NameTextBox))
                 return;
-            }
-
 
             if (!PhoneTextBox.MaskFull)
             {
-                PhoneTextBox.BackColor = Color.Red;
+                PhoneTextBox.BackColor = Color.LightPink;
                 return;
             }
 
             PhoneTextBox.BackColor = Color.White;
+
+            if (!RegexCheck(patternMail, MailTextBox))
+                return;
+
+            if (!RegexCheck(patternVkId, VkIdTextBox))
+                return;
+
 
             OkButton.Enabled = true;
         }

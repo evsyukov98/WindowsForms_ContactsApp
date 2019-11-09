@@ -14,29 +14,38 @@ namespace ContactsApp.Model
         /// </summary>
         public List<Contact> List { get; set; }
 
-        public List<Contact> SortedList()
+        /// <summary>
+        ///     Сортировка списка контактов
+        /// </summary>
+        public List<Contact> SortList()
         {
             var sortedList = List.OrderBy(contact => contact.Surname).ToList();
             return sortedList;
         }
 
-        public List<Contact> SortedList(string substring)
+        /// <summary>
+        ///     Сортировка списка контактов
+        /// </summary>
+        public List<Contact> SortList(string substring)
         {
             var findSortedList = from contact in List
-                                 where contact.Surname.StartsWith(substring,
-                                     StringComparison.OrdinalIgnoreCase)
-                                 orderby contact.Surname
-                                 select contact;
+                where contact.Surname.StartsWith(substring,
+                    StringComparison.OrdinalIgnoreCase)
+                orderby contact.Surname
+                select contact;
 
             return findSortedList.ToList();
         }
 
+        /// <summary>
+        ///     Возращает писок контактов у которых день рождения.
+        /// </summary>
         public List<Contact> BirthdayList()
         {
             var birthdayList = from contact in List
-                               where contact.Birthday.DayOfYear == DateTime.Now.DayOfYear
-                               orderby contact.Surname
-                               select contact;
+                where contact.Birthday.DayOfYear == DateTime.Now.DayOfYear
+                orderby contact.Surname
+                select contact;
 
             return birthdayList.ToList();
         }
