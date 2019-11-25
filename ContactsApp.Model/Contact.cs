@@ -109,6 +109,7 @@ namespace ContactsApp.Model
                 }
             }
         }
+        
 
         /// <summary>
         ///     Возвращает и задает номер пользователя.

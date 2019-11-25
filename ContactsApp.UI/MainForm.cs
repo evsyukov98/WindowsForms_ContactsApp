@@ -4,8 +4,6 @@ using System.IO;
 using System.Windows.Forms;
 using ContactsApp.Model;
 
-
-
 namespace ContactsApp.UI
 {
     public partial class MainForm : Form
@@ -30,14 +28,26 @@ namespace ContactsApp.UI
         /// </summary>
         private void ProjectLoad()
         {
+            var path =
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+                + @"\ContactsApp";
+
             try
             {
-                _project = ProjectManager<Project>.LoadFromFile(@"ContactsApp.notes");
+                _project =
+                    ProjectManager<Project>.LoadFromFile(path + @"\ContactsApp.notes");
             }
             catch
             {
-                var fileInfo = new FileInfo(@"ContactsApp.notes");
-                if (!fileInfo.Exists)
+                var dirInfo = new DirectoryInfo(path);
+                var fileInfo = new FileInfo(path + @"\ContactsApp.notes");
+
+                if (!dirInfo.Exists)
+                {
+                    dirInfo.Create();
+                    fileInfo.Create().Close();
+                }
+                else if (!fileInfo.Exists)
                 {
                     fileInfo.Create().Close();
                 }
@@ -48,9 +58,7 @@ namespace ContactsApp.UI
                 _project = new Project {List = new List<Contact>()};
             }
 
-            _project.List = _project.SortList();
-            ContactsListBox.DisplayMember = "Surname";
-            ContactsListBox.DataSource = _project.List;
+            ResetListBox();
         }
 
         /// <summary>
@@ -58,8 +66,12 @@ namespace ContactsApp.UI
         /// </summary>
         private void ProjectSave()
         {
+            var path =
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+                + @"\ContactsApp\ContactsApp.notes";
+
+            ProjectManager<Project>.SaveToFile(_project, path);
             ResetListBox();
-            ProjectManager<Project>.SaveToFile(_project, @"ContactsApp.notes");
         }
 
         /// <summary>
@@ -69,14 +81,22 @@ namespace ContactsApp.UI
         {
             _project.List = _project.SortList();
             ContactsListBox.DataSource = _project.List;
+            ContactsListBox.DisplayMember = "Surname";
         }
 
 
         /// <summary>
-        ///  Проверить день рождения.
+        ///     Проверить день рождения.
         /// </summary>
         private void CheckBirthday()
         {
+            if (_project.BirthdayList().Count == 0)
+            {
+                BirthdayListBox.Hide();
+                BirthdayList.Hide();
+                return;
+            }
+
             BirthdayListBox.DisplayMember = "Surname";
             BirthdayListBox.DataSource = _project.BirthdayList();
         }
@@ -94,6 +114,8 @@ namespace ContactsApp.UI
 
                 ProjectSave();
             }
+
+            FindTextBoxCheck();
         }
 
         /// <summary>
@@ -101,19 +123,24 @@ namespace ContactsApp.UI
         /// </summary>
         private void EditContact()
         {
-            var selectedIndex = ContactsListBox.SelectedIndex;
+            if (ContactsListBox.SelectedIndex == -1)
+            {
+                return;
+            }
 
-            var selectedContact = _project.List[selectedIndex];
+            var selectedContact = (Contact) ContactsListBox.SelectedItem;
 
-            var editForm = new ContactForm { Contact = selectedContact };
+
+            var editForm = new ContactForm {Contact = selectedContact};
 
             if (editForm.ShowDialog() == DialogResult.OK)
             {
-                _project.List.RemoveAt(selectedIndex);
-                _project.List.Insert(selectedIndex, editForm.Contact);
-
+                _project.List.Remove(selectedContact);
+                _project.List.Add(editForm.Contact);
                 ProjectSave();
             }
+
+            FindTextBoxCheck();
         }
 
         /// <summary>
@@ -121,21 +148,24 @@ namespace ContactsApp.UI
         /// </summary>
         private void DeleteContact()
         {
-            var selectedIndex = ContactsListBox.SelectedIndex;
-            if (selectedIndex == -1)
+            if (ContactsListBox.SelectedIndex == -1)
             {
                 return;
             }
 
+            var selectedContact = (Contact) ContactsListBox.SelectedItem;
+
             var result = MessageBox.Show(
-                $@"Are you sure you want to remove: {_project.List[selectedIndex].Surname}",
+                $@"Are you sure you want to remove: {selectedContact.Surname}",
                 @"Warning", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.OK)
             {
-                _project.List.RemoveAt(selectedIndex);
+                _project.List.Remove(selectedContact);
                 ProjectSave();
             }
+
+            FindTextBoxCheck();
         }
 
         /// <summary>
@@ -175,9 +205,17 @@ namespace ContactsApp.UI
         /// <summary>
         ///     Поиск по фамилии.
         /// </summary>
+        private void FindTextBoxCheck()
+        {
+            if (!FindTextBox.Contains(null))
+            {
+                ContactsListBox.DataSource = _project.SortList(FindTextBox.Text);
+            }
+        }
+
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
-            ContactsListBox.DataSource = _project.SortList(FindTextBox.Text);
+            FindTextBoxCheck();
         }
 
         /// <summary>
@@ -236,7 +274,5 @@ namespace ContactsApp.UI
         {
             DeleteContact();
         }
-
-        
     }
 }
