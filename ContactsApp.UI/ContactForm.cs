@@ -9,17 +9,17 @@ namespace ContactsApp.UI
     public partial class ContactForm : Form
     {
         /// <summary>
+        /// Класс Contact
+        /// </summary>
+        private Contact _contact;
+
+        /// <summary>
         /// Конструктор AddEditContact
         /// </summary>
         public ContactForm()
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// Класс Contact
-        /// </summary>
-        private Contact _contact;
 
         /// <summary>
         /// Создает экземпляр класса Contact
@@ -62,7 +62,6 @@ namespace ContactsApp.UI
         private void CancelButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            
         }
 
         /// <summary>

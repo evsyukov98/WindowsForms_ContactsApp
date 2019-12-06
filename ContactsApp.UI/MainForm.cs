@@ -116,6 +116,7 @@ namespace ContactsApp.UI
             }
 
             FindTextBoxCheck();
+            ContactsListBox.SelectedItem = addForm.Contact;
         }
 
         /// <summary>
@@ -130,7 +131,6 @@ namespace ContactsApp.UI
 
             var selectedContact = (Contact) ContactsListBox.SelectedItem;
 
-
             var editForm = new ContactForm {Contact = selectedContact};
 
             if (editForm.ShowDialog() == DialogResult.OK)
@@ -141,6 +141,7 @@ namespace ContactsApp.UI
             }
 
             FindTextBoxCheck();
+            ContactsListBox.SelectedItem = editForm.Contact;
         }
 
         /// <summary>
@@ -166,6 +167,9 @@ namespace ContactsApp.UI
             }
 
             FindTextBoxCheck();
+            UpdateTextBoxes(null);
+            ContactsListBox.SelectedIndex = -1;
+
         }
 
         /// <summary>
@@ -173,15 +177,29 @@ namespace ContactsApp.UI
         /// </summary>
         private void ContactsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ContactsListBox.SelectedIndex != -1)
+            if(ContactsListBox.SelectedItem != null)
             {
-                var selectedContact = _project.List[ContactsListBox.SelectedIndex];
-                SurnameTextBox.Text = selectedContact.Surname;
-                NameTextBox.Text = selectedContact.Name;
-                BirthdayDateTimePicker.Value = selectedContact.Birthday;
-                PhoneTextBox.Text = selectedContact.Phone;
-                MailTextBox.Text = selectedContact.Mail;
-                VkIdTextBox.Text = selectedContact.VkId;
+                UpdateTextBoxes((Contact) ContactsListBox.SelectedItem);
+            }
+            else
+            {
+                UpdateTextBoxes(null);
+            }
+        }
+
+        /// <summary>
+        ///     Обновить все TextBox, если null все пустрые
+        /// </summary>
+        private void UpdateTextBoxes(Contact contact)
+        {
+            if (contact != null)
+            {
+                SurnameTextBox.Text = contact.Surname;
+                NameTextBox.Text = contact.Name;
+                BirthdayDateTimePicker.Value = contact.Birthday;
+                PhoneTextBox.Text = contact.Phone;
+                MailTextBox.Text = contact.Mail;
+                VkIdTextBox.Text = contact.VkId;
             }
             else
             {
@@ -207,10 +225,7 @@ namespace ContactsApp.UI
         /// </summary>
         private void FindTextBoxCheck()
         {
-            if (!FindTextBox.Contains(null))
-            {
-                ContactsListBox.DataSource = _project.SortList(FindTextBox.Text);
-            }
+            ContactsListBox.DataSource = _project.SortList(FindTextBox.Text);
         }
 
         private void FindTextBox_TextChanged(object sender, EventArgs e)

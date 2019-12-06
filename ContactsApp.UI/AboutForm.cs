@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 namespace ContactsApp.UI
-{//TODO
+{
     public partial class AboutForm : Form
     {
         public AboutForm()
